@@ -12,19 +12,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
-import org.springframework.session.data.mongo.JdkMongoSessionConverter;
-import org.springframework.session.data.mongo.config.annotation.web.http.EnableMongoHttpSession;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -33,13 +34,15 @@ import org.springframework.session.data.mongo.config.annotation.web.http.EnableM
 @EnableDiscoveryClient
 @EnableZuulProxy
 @SpringBootApplication
+@EnableCircuitBreaker
+//@EnableH
 //@RestController
 //@RibbonClient(name = "service-hello", configuration = SayHelloConfiguration.class)
 public class Application {
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(Application.class).web(true).run(args);
-         //SpringApplication.run(Application.class, args);
+        //SpringApplication.run(Application.class, args);
 
     }
 
@@ -48,11 +51,19 @@ public class Application {
         return new SimpleFilter();
     }
 
-//    @LoadBalanced
-//    @Bean
-//    RestTemplate restTemplate() {
-//        return new RestTemplate();
-//    }
+    @LoadBalanced
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate(clientHttpRequestFactory());
+    }
+
+    private ClientHttpRequestFactory clientHttpRequestFactory() {
+        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+        factory.setReadTimeout(2000);
+        factory.setConnectTimeout(2000);
+        return factory;
+    }
+
 //
 //    @Autowired
 //    RestTemplate restTemplate;
