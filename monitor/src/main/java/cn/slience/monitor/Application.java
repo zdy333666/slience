@@ -69,4 +69,5 @@ public class Application {
 //            @PathVariable String applicationName) {
 //        return this.discoveryClient.getInstances(applicationName);
 //    }
+
 //}
