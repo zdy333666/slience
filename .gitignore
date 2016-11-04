@@ -9,3 +9,5 @@
 /test/g20-report/target/
 /services/aggregate/target/
 /services/gabinfo/target/
+/test/service-graph-neo4j/target/
+/services/rchl/target/
