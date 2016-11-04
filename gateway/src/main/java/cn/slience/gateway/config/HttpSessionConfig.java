@@ -14,8 +14,8 @@ import org.springframework.session.data.mongo.config.annotation.web.http.EnableM
  *
  * @author slience
  */
-@Configuration
-@EnableMongoHttpSession
+//@Configuration
+//@EnableMongoHttpSession
 public class HttpSessionConfig {
 
     //@Bean
