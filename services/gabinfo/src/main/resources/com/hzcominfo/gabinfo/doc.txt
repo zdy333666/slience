@@ -1,0 +1,46 @@
+-- 全国人口:
+DataObjectCode:"A090"
+Condition:"SFZH='330103199107170010'"
+RequiredItems:[
+  BYQK: 兵役情况  
+  XP:   相片
+  HYZK: 婚姻状况
+  ZZXZ: 住址详址
+  CSDXZ:出生地详址
+  CSRQ: 出生日期
+  CSD:  出生地
+  WHCD: 文化程度
+  CYM:  曾用名
+  RYBH: 人员编号
+  HKSZD:户口所在地
+  XB:   性别
+  SFZH: 身份证号
+  JGSSX:籍贯省市县
+  XM:   姓名
+  SG:   身高
+  FWCS: 服务场所
+  MZ:   民族
+
+
+-- 全国人口:
+DataObjectCode:"A001"
+Condition:"SFZH='330103199107170010'"
+RequiredItems:[
+  BYQK: 兵役情况  
+  XP:   相片
+  HYZK: 婚姻状况
+  ZZXZ: 住址详址
+  CSDXZ:出生地详址
+  CSRQ: 出生日期
+  CSD:  出生地
+  WHCD: 文化程度
+  CYM:  曾用名
+  HKSZD:户口所在地
+  XB:   性别
+  SFZH: 身份证号
+  JGSSX:籍贯省市县
+  XM:   姓名
+  SG:   身高
+  FWCS: 服务场所
+  MZ:   民族
+  ZY:   职业

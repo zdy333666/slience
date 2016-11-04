@@ -1,3 +1,11 @@
 /registry/target/
 /gateway/target/
 /service-graph-neo4j/target/
+/configuration/target/
+/webmagic/target/
+/monitor/target/
+/relation/relation-person-peccancy/target/
+/test/archive/target/
+/test/g20-report/target/
+/services/aggregate/target/
+/services/gabinfo/target/

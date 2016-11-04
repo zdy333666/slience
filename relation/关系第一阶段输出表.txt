@@ -1,0 +1,45 @@
+关系类别	计算结果输出表名
+
+---飞机（同航班）	mapred_SameFlight 
+	
+#飞机（邻座）	mapred_FlightSeatNeighbor
+	
+---火车（同车次）	mapred_SameTrain
+#火车（同车厢）	mapred_SameCarriage
+#火车（邻座）	mapred_TrainSeatNeighbor
+
+#旅馆住宿（同房）	mapred_SameHotelRome
+	
+---旅馆住宿（同时）	mapred_SameHotel
+	
+#旅馆住宿（邻房）	mapred_HotelRoomNeighbor
+	
+---网吧上网（同时）	mapred_SameCybercafe
+#网吧上网（邻座）	mapred_CybercafeSeatNeighbor
+
+#房屋租赁（同址）	mapred_HouseRent
+	
+---同地址	mapred_SameAddress
+
+#同户籍10+	mapred_SameHouseholdRegister
+---同户籍	mapred_SameHouseholdRegister
+
+---同暂住	mapred_SameStay
+
+#亲属	mapred_Relative
+#通信联系	mapred_Communication
+#通讯录	mapred_Contact
+
+#同案嫌疑人	mapred_SameCaseSuspect
+#同案当事人	mapred_SameCaseParty		
+#同案相关人	mapred_SameCase
+	
+#同单位300+	mapred_Colleague
+#同单位100+	mapred_Colleague
+#同单位50+	mapred_Colleague
+---同单位	mapred_Colleague
+		
+---同学校	mapred_Schoolmate
+---同固定电话	mapred_SameTelephone
+---同机动车	mapred_SameCar			
+同移动电话	mapred_SamePhone
