@@ -12,6 +12,7 @@
         <version>1.2.8.RELEASE</version>
     </parent>
 
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -25,13 +26,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-ribbon</artifactId>
         </dependency>
+        
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-turbine</artifactId>
         </dependency>
 
         <!--        <dependency>
@@ -40,8 +38,7 @@
             <scope>test</scope>
         </dependency>-->
         
-        
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-mongo</artifactId>
             <version>1.2.0.RC1</version>
@@ -50,17 +47,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
-        
+        </dependency>-->
         <!--        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>-->
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>2.14.1</version>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -83,17 +74,6 @@
             </plugin>
         </plugins>
     </build>
-    
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/libs-milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
