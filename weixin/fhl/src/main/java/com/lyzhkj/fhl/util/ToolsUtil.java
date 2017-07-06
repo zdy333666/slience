@@ -111,7 +111,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(ToolsUtil.class);
 //		Logger.err(MessageUtil.initImageMessage(packet, content));
 //	}
 	
-	//消息输出 Json
+//	//消息输出 Json
 //	public static void ReplyTextMessage(Packet packet, String content){				
 //		ReplyTextMessage(packet,content,true); 
 //	}

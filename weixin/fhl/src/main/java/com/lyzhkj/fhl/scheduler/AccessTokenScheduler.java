@@ -8,6 +8,7 @@ package com.lyzhkj.fhl.scheduler;
 import com.lyzhkj.fhl.cache.Cache;
 import com.lyzhkj.fhl.conf.WeiXinConfig;
 import com.lyzhkj.fhl.weixin.util.WeiXinAccessTokenUtil;
+import com.lyzhkj.fhl.weixin.util.WeiXinJsSdkUtil;
 import com.lyzhkj.weixin.common.pojo.AccessToken;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -23,12 +24,17 @@ public class AccessTokenScheduler {
      * 从微信服务器获得令牌(有效时间2H)
      *
      */
-    @Scheduled(fixedDelay = 1000 * 60 * 60 * 1)
+    @Scheduled(fixedDelay = 1000 * 60 * 30 * 3)
     public void getAccessToken() {
 
-        AccessToken accessToken =WeiXinAccessTokenUtil.getAccessToken(WeiXinConfig.ACCESS_TOKEN_URL, WeiXinConfig.APP_ID, WeiXinConfig.APP_SECRET);
+        AccessToken accessToken = WeiXinAccessTokenUtil.getAccessToken(WeiXinConfig.ACCESS_TOKEN_URL, WeiXinConfig.APP_ID, WeiXinConfig.APP_SECRET);
         if (accessToken != null) {
-            Cache.accessToken=accessToken;
+            Cache.accessToken = accessToken;
+
+            String ticket = WeiXinJsSdkUtil.getJsSdkTicket(accessToken.getAccessToken());
+            if (ticket != null) {
+                Cache.jsapi_ticket = ticket;
+            }
         }
 
     }

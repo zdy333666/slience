@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="applicable-device" content="mobile" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/style_sj.css" />
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="success">
+                    <div class="top">
+                        <div class="saoma_prompt" id="title">等待扫码</div>
+                        <div class="integral_all">
+                            <p>可用积数</p>
+                            <p><strong id="userscore">--</strong></p>
+                        </div>
+                    </div>		
+                </div>
+                <div class="fail" style="display:none">
+                    <div class="top_hui">
+                        <div class="saoma_prompt_hui">扫码失败!</div>
+                        <div class="integral_all_hui">
+                            请确认您的卡是否有效的智能垃圾分类卡
+                        </div>
+                    </div>
+                </div>			
+            </div>	
+
+            <div class="row">
+                <div class="success">
+                    <div class="information" style="margin-bottom:2.5em">
+                        <ul>		            
+                            <li><span class="title hui">输入积分</span> 
+                                <span class="cont"><input type="number"  id="payScore" disabled="disabled"/></span>	
+                                <span class="all-checkbox"><input type="button" onClick="copyAllScore()" value="全部兑换" /></span>	                
+                            </li>
+                        </ul>
+                    </div>		
+                </div>
+                <div class="fail" style="display:none">
+                    <div class="information">
+                        <ul>			            
+                            <li><span class="title hui">兑换积分数</span> 
+                                <span class="cont"></span>
+                                <span class="all-checkbox"></span>
+                            </li>
+                        </ul>
+                    </div>		
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="success"  style="height:28em">
+                    <div class="information">
+                        <ul>
+                            <li ><span class="title hui">业主</span> <span class="cont" id="username">--</span></li>
+                            <li><span class="title hui">户号</span> <span class="cont" id="useraddr">--</span></li>
+                            <li><span class="title hui">手机号</span> <span class="cont" id="usertel">--</span></li>
+                        </ul>
+                    </div>			
+                </div>
+                <div class="fail" style="display:none;">
+                    <div class="information">
+                        <ul>
+                            <li ><span class="title hui">业主</span> <span class="cont"></span></li>
+                            <li><span class="title hui">户号</span> <span class="cont"></span></li>
+                            <li><span class="title hui">手机号</span> <span class="cont"></span></li>
+                        </ul>
+                    </div>		
+                </div>
+            </div>
+
+            <div class="row">
+                <br/>
+                <br/>		
+            </div>				
+        </div>
+
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="row">
+                <div class="success">
+                    <div class="button">
+                        <button type="button" class="btn btn-successbbb" onClick="immFunction()" id="immbutton" disabled>立即兑换</button>
+                        <button type="button" class="btn btn-successbbb" onClick="scanFunction('')" id="scanbutton" >开始扫码</button>                 
+                    </div>
+                </div>
+                <div class="fail" style="display:none">
+                    <div class="button">  
+                        <input onClick="scanFunction('')"  type="button" value="重新扫卡">        
+                    </div>		
+                </div>
+            </div>	
+        </nav>
+
+        <!-- 隐藏内容-->
+        <input type="hidden" value="${storeopenid}" id="storeopenid"/>
+        <input type="hidden" value="${windowclose}" id="windowclose"/>
+
+        <!-- 弹出框  确认画面-->
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" 
+             aria-labelledby="myModalLabel" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="information" >
+                            <ul>
+                                <li ><span class="title">业主</span> <span class="cont2 hui" id="con_username"></span></li>
+                                <li><span class="title">户号</span> <span class="cont2 hui" id="con_useraddr"></span></li>
+                                <li><span class="title">手机号</span> <span class="cont2 hui" id="con_usertel"></span></li>
+                                <li><span class="title">兑换积分数</span> <span class="value" id="con_userpayscore"></span></li>
+                            </ul>
+                        </div>
+
+                        <div class="button">
+                            <input class="confirmbutton" onClick="confirmFunction('myModal1')" type="button" value="确认兑换">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div> 
+
+        <!-- 弹出框  成功画面-->
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" 
+             aria-labelledby="myModalLabel" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="information" style="border:none">
+                            <div class="result">
+                                <img src="img/success.png" width="102" height="102">
+                                <p>兑换成功！</p>
+                            </div>
+
+                            <div class="exchange-infor">
+                                <p class="fl"><span>本次兑换</span><br><span id="usedScore"></span></p>
+                                <p class="line"></p>
+                                <p class="fr"><span>剩余积分</span><br><span id="lastScore"></span></p>
+                            </div>
+                            <div class="button2">
+                                <ul>
+                                <li class="fl">
+                                    <input onClick="scanFunction('myModal2')" type="button" value="继续扫卡">
+                                </li>
+                                <li class="fr">
+                                    <input onClick="closeWindow()" type="button" value="退出应用">
+                                </li>
+                                </ul>
+                                <div style="clear:both;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 弹出框  失败画面-->
+        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" 
+             aria-labelledby="myModalLabel" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="information" style="border:none">
+                            <div class="result">
+                                <img src="img/failure.png" width="102" height="102">
+                                <p>兑换失败！</p>
+                            </div>
+                            <div class="exchange-infor2">
+                                <p>请检查您的网络后重试，或返回重新扫卡。</p>            
+                            </div>
+                            <div class="button2">
+                                <li class="fl">
+                                    <input onClick="confirmFunction('myModal3')" name="" type="button" value="重试">
+                                </li>
+                                <li class="fr">
+                                    <input onClick="scanFunction('myModal3')" name="" type="button" value="重新扫卡">
+                                </li>
+                                <div style="clear:both;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jweixin-1.0.0.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+<!--        <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>-->
+                <script src="js/sjReceiveMain.js"></script>
+    </body>
+</html>
+

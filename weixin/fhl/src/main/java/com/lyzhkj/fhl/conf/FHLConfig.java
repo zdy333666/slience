@@ -18,11 +18,16 @@ public class FHLConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FHLConfig.class);
 
-    public static String WEIXIN_TOKEN_SERVER;
+    //public static String WEIXIN_TOKEN_SERVER;
     public static String APP_URL;
 
     public static String NOTICEMESSAGE_WEBSERVICE_SERVER_IP;
     public static int NOTICEMESSAGE_WEBSERVICE_SERVER_PORT;
+
+    public static String NET_SERVER_IP;
+    public static int NET_SERVER_PORT;
+    public static String JPUSH_APP_KEY;
+    public static String JPUSH_MASTER_SECRET;
 
     static {
         try {
@@ -30,15 +35,20 @@ public class FHLConfig {
             props.setDelimiterParsingDisabled(true);
             props.load("config/fhl.properties");
 
-            WEIXIN_TOKEN_SERVER = props.getString("fhl.weixin_token_server");
+            //WEIXIN_TOKEN_SERVER = props.getString("fhl.weixin_token_server");
             APP_URL = props.getString("fhl.app_url");
 
             NOTICEMESSAGE_WEBSERVICE_SERVER_IP = props.getString("fhl.noticeMessage.webservice.server.ip");
             NOTICEMESSAGE_WEBSERVICE_SERVER_PORT = props.getInt("fhl.noticeMessage.webservice.server.port");
 
-            LOGGER.info(new StringBuilder("fhl.weixin_token_server").append(":").append(WEIXIN_TOKEN_SERVER).toString());
+            NET_SERVER_IP = props.getString("fhl.netServerIp");
+            NET_SERVER_PORT = props.getInt("fhl.netServerPort");
+            JPUSH_APP_KEY = props.getString("fhl.jpush_app_key");
+            JPUSH_MASTER_SECRET = props.getString("fhl.jpush_master_secret");
 
             props = null;
+
+            //LOGGER.info(new StringBuilder("fhl.weixin_token_server").append(":").append(WEIXIN_TOKEN_SERVER).toString());
         } catch (ConfigurationException ex) {
             LOGGER.error("failed to load config/fhl.properties", ex);
             System.exit(0);

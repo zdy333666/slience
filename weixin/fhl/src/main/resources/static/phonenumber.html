@@ -1,47 +1,116 @@
 <!DOCTYPE html>
 <html>
-<head>
-   <meta name="renderer" content="webkit|ie-comp|ie-stand">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-   <title>手机号页面</title>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-   <meta http-equiv="Cache-Control" content="no-siteapp">
-   <meta name="apple-mobile-web-app-capable" content="yes">
-   <meta name="mobile-web-app-capable" content="yes">
-   <meta name="format-detection" content="telephone=no">
-   <meta name="keywords" content="">
-   <meta name="description" content="">
+    <head>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>手机号页面</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
 
-   <link rel="stylesheet" type="text/css" href="css/base.css">
-   <link rel="stylesheet" type="text/css" href="css/index.css">
-</head>
-<body>
-    <div id="wrap">
-        <!-- <div id="header">
-            <a href="javascript:history.go(-1)" class="icon_1"><span><img src="img/left-back.png" alt=""></span>微信</a>
-            <h3>垃圾去哪儿</h3>
-            <a href="personalcenter.html" class="icon_2"><span><img src="img/customer.png" alt=""></span></a>
-        </div> -->
-        <!-- 遮罩层 -->
-        <div class="mask_num"></div>
-        <!-- 兑换页面 -->
-        <div class="num_cancel">
-            <p>注销手机号</p>
-            <p><button class="cancel">取消</button><button class="confirm">确定</button></p>
-        </div>
-        <div id="phonenumber-main">
-            <div class="phonenumber-main-content">
-                <p class="p-img"><img src="img/tel.png" alt=""></p>
-                <p class="p-num">你的手机号：13064783256</p>
-                <button class="first-button"><a href="changenum.html">更换手机号码</a></button>
-                <button>注销</button>
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- <div id="header">
+                <a href="javascript:history.go(-1)" class="icon_1"><span><img src="img/left-back.png" alt=""></span>微信</a>
+                <h3>垃圾去哪儿</h3>
+                <a href="personalcenter.html" class="icon_2"><span><img src="img/customer.png" alt=""></span></a>
+            </div> -->
+            <!-- 遮罩层 -->
+            <div class="mask_num"></div>
+            <!-- 兑换页面 -->
+            <div class="num_cancel">
+                <p>注销手机号</p>
+                <p><button id="cancel">取消</button><button id="confirm">确定</button></p>
             </div>
+            <div id="phonenumber-main">
+                <div class="phonenumber-main-content">
+                    <p class="p-img"><img src="img/tel.png" alt=""></p>
+                    <p class="p-num"></p>
+                    <!--                    你的手机号：13064783256-->
+                    <button class="first-button">更换手机号码</button>
+                    <button id="logoff">注销</button>
+                </div>
+            </div>
+
         </div>
 
-    </div>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script>
+            var url_base = window.location.protocol + "//" + window.location.host;
+            var port = window.location.port;
+            if (port !== '') {
+                url_base = url_base + ":" + port;
+            }
 
-</body>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+            var search = window.location.search;
+            search = search.substring(1);
+            var openId = search.split("&")[0].split("=")[1];
+            var phoneno = search.split("&")[1].split("=")[1];
+
+            $(document).ready(function () {
+
+                $('#phonenumber-main .p-num').text('你的手机号：' + phoneno);
+                $('#phonenumber-main button.first-button').click(function () {
+                    window.location.href = 'changenum.html?openId=' + openId + '&phoneno=' + phoneno;
+                });
+
+                var $height = $(document).height();
+                // 手机注销遮罩层
+                $("#logoff").on("click", function () {
+                    $("div.mask_num").height($height).show();
+                    $(".num_cancel").show();
+                });
+
+                $(".num_cancel #cancel").on("click", function () {
+                    $("div.mask_num").hide();
+                    $(".num_cancel").hide();
+                });
+
+                $("div.mask_num").on("touchstart", function () {
+                    $("div.mask_num").hide();
+                    $(".num_cancel").hide();
+                });
+
+                $(".num_cancel #confirm").on("click", function () {
+                    if (null == phoneno || phoneno.trim().length === 0) {
+                        return;
+                    }
+
+                    $("div.mask_num").hide();
+                    $(".num_cancel").hide();
+                    var url = url_base + "/user-bind/logoff?openId=" + openId;
+                    var request = $.ajax({
+                        url: url,
+                        method: "GET",
+                        //data: JSON.stringify(input),
+                        dataType: 'json'
+                    });
+                    request.done(function (msg) {
+                        if (msg) {
+                            alert('注销成功');
+                            WeixinJSBridge.call('closeWindow');
+                        } else {
+                            alert('很抱歉，您的注销操作没有成功，请稍后再试');
+                        }
+                    });
+                    request.fail(function (jqXHR, textStatus) {
+                        alert("Request failed: " + textStatus);
+                    });
+                });
+
+            });
+
+        </script>
+
+    </body>
 </html>

@@ -6,10 +6,9 @@
 package com.lyzhkj.fhl.dao;
 
 import com.lyzhkj.fhl.pojo.GarRole;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,23 +20,31 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class GarRoleDAO {
     
+    private static final Logger LOGGER = LoggerFactory.getLogger(GarRoleDAO.class);
+    
     @Autowired
     private JdbcTemplate jdbcTemplate;
     
-    public  List<GarRole>  findRolesByUserId(String userId){
-         List<Map<String, Object>> rows = jdbcTemplate.queryForList("SELECT r.roleid,r.name FROM gar_UserRole ur LEFT JOIN gar_Role r ON ur.roleid=r.roleid WHERE ur.userid=?",userId);
+    /**
+     * 
+     * @param userId
+     * @return 
+     */
+    public GarRole findRoleByUserId(String userId){
+        GarRole role=null;
+        
+        try{
+             Map<String, Object> row = jdbcTemplate.queryForMap("SELECT r.roleid,r.name  FROM gar_UserRoleCloud ur,gar_RoleCloud r WHERE ur.roleid=r.roleid AND ur.userid=?", userId);
 
-        List<GarRole> result = new ArrayList<>();
-        for (Map<String, Object> row : rows) {
-            GarRole role = new GarRole();
-            role.setRoleId((int) row.get("roleid"));
+            role = new GarRole();
+            role.setId((int) row.get("roleid"));
             role.setName((String) row.get("name"));
-
-            result.add(role);
+            
+        }catch(Exception e){
+            LOGGER.error("", e);
+            return null;
         }
         
-        return result;
+        return role;
     }
-    
-    
 }

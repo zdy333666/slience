@@ -1,69 +1,70 @@
 <!DOCTYPE html>
 <html>
-<head>
- <meta name="renderer" content="webkit|ie-comp|ie-stand">
- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
- <title>我的兑换</title>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
- <meta http-equiv="Cache-Control" content="no-siteapp">
- <meta name="apple-mobile-web-app-capable" content="yes">
- <meta name="mobile-web-app-capable" content="yes">
- <meta name="format-detection" content="telephone=no">
- <meta name="keywords" content="">
- <meta name="description" content="">
+    <head>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>我的兑换</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
 
- <link rel="stylesheet" type="text/css" href="css/base.css">
- <link rel="stylesheet" type="text/css" href="css/index.css">
-</head>
-<body>
-  <div id="wrap">
-    <!-- <div id="header">
-      <a href="javascript:history.go(-1)" class="icon_1"><span><img src="img/left-back.png" alt=""></span>微信</a>
-      <h3>积分礼遇</h3>
-      <a href="personalcenter.html" class="icon_2"><span><img src="img/customer.png" alt=""></span></a>
-    </div> -->
-    <!-- 遮罩层 -->
-    <div class="mask_myexchange"></div>
-    <!-- 兑换页面 -->
-    <div class="myexchange">
-      <p>请让商户告知确认代码</p>
-      <input type="text" name="">
-      <button>提交</button>
-    </div>
-    <div id="myexchange-main">
-      <div class="myexchange-main-content">
-        <ul>
-          <li class="clearfix">
-            <div class="fl"><img src="img/score.png" alt=""></div>
-            <div class="fr">
-              <p class="title">百度阅读10元代金券</p>
-              <p class="clearfix">
-                <span class="fl">畅想阅读新方式</span>
-                <button class="fr">立即兑换</button>
-              </p>
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- <div id="header">
+              <a href="javascript:history.go(-1)" class="icon_1"><span><img src="img/left-back.png" alt=""></span>微信</a>
+              <h3>积分礼遇</h3>
+              <a href="personalcenter.html" class="icon_2"><span><img src="img/customer.png" alt=""></span></a>
+            </div> -->
+            <!-- 遮罩层 -->
+            <div class="mask_myexchange"></div>
+            <!-- 兑换页面 -->
+            <div class="myexchange" id="makeExchangeUsed">
+                <p>请让商户告知确认代码</p>
+                <input type="text" id="code">
+                <button onclick="makeExchangeUsed(this)">提交</button>
             </div>
-          </li>
-          <li class="clearfix">
-            <div class="fl"><img src="img/score.png" alt=""></div>
-            <div class="fr">
-              <p class="title">百度阅读10元代金券</p>
-              <p class="clearfix">
-                <span class="fl">畅想阅读新方式</span>
-                <button class="fr">立即兑换</button>
-              </p>
+            <div id="myexchange-main">
+                <div class="myexchange-main-content">
+                    <ul>
+                        <!--                        <li class="clearfix">
+                                                    <div class="fl"><img src="img/score.png" alt=""></div>
+                                                    <div class="fr">
+                                                        <p class="title">百度阅读10元代金券</p>
+                                                        <p class="clearfix">
+                                                            <span class="fl">畅想阅读新方式</span>
+                                                            <button class="fr">立即兑换</button>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <div class="fl"><img src="img/score.png" alt=""></div>
+                                                    <div class="fr">
+                                                        <p class="title">百度阅读10元代金券</p>
+                                                        <p class="clearfix">
+                                                            <span class="fl">畅想阅读新方式</span>
+                                                            <button class="fr">立即兑换</button>
+                                                        </p>
+                                                    </div>
+                                                </li>-->
+                    </ul>
+
+                </div>
             </div>
-          </li>
-        </ul>
 
-      </div>
-    </div>
+        </div>
 
-  </div>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/dropload.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/myexchange.js"></script>
 
-</div>
-
-</body>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+    </body>
 </html>

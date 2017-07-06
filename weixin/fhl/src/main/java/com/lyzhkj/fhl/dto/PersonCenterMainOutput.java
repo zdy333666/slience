@@ -13,6 +13,13 @@ import com.lyzhkj.fhl.pojo.IntegralOverview;
  */
 public class PersonCenterMainOutput {
 
+    private String headPic;
+    private String username;
+    private IntegralOverview integral;
+    private String qrPic;
+    private String phoneno;
+    private String role;
+
     /**
      * @return the headPic
      */
@@ -97,10 +104,4 @@ public class PersonCenterMainOutput {
         this.role = role;
     }
 
-    private String headPic;
-    private String username;
-    private IntegralOverview integral;
-    private String qrPic;
-    private String phoneno;
-    private String role;
 }

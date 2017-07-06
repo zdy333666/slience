@@ -6,9 +6,10 @@
 package com.lyzhkj.fhl.controller;
 
 import com.lyzhkj.fhl.handler.WeiXinClickEventHandler;
+import com.lyzhkj.fhl.handler.WeiXinLocationEventHandler;
 import com.lyzhkj.fhl.handler.WeiXinScanCodePushEventHandler;
 import com.lyzhkj.fhl.handler.WeiXinSubscribeEventHandler;
-import com.lyzhkj.weixin.common.util.MessageConst;
+import com.lyzhkj.weixin.common.util.WeiXinMessageConst;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,46 +33,53 @@ public class WeiXinRequestDispatcher {
 
     @Autowired
     private WeiXinScanCodePushEventHandler weiXinScanCodePushEventHandler;
+    
+    @Autowired
+    private WeiXinLocationEventHandler weiXinLocationEventHandler;
 
     public void dispatch(Map<String, String> body) {
 
         String msgType = body.get("MsgType");
         //输入
-        if (MessageConst.MESSAGE_TEXT.equals(msgType)) {
+        if (WeiXinMessageConst.MESSAGE_TEXT.equals(msgType)) {
             //用户输入
-            String openId = body.get("FromUserName");
+            //String openId = body.get("FromUserName");
 
+            return;
         }
 
         //菜单点击
-        if (MessageConst.MESSAGE_EVNET.equals(msgType)) {
+        if (WeiXinMessageConst.MESSAGE_EVNET.equals(msgType)) {
             String event = body.get("Event");
             LOGGER.info("event-->" + event);
 
             //用户关注公众号
-            if (MessageConst.MESSAGE_SUBSCRIBE.equals(event)
-                    || MessageConst.MESSAGE_UNSUBSCRIBE.equals(event)) {
+            if (WeiXinMessageConst.MESSAGE_SUBSCRIBE.equals(event)
+                    || WeiXinMessageConst.MESSAGE_UNSUBSCRIBE.equals(event)) {
 
                 weiXinSubscribeEventHandler.handle(body);
 
-            } else if (MessageConst.MESSAGE_CLICK.equals(event)) {
+            } else if (WeiXinMessageConst.MESSAGE_CLICK.equals(event)) {
 
                 //菜单点击
                 weiXinClickEventHandler.handle(body);
 
-            } else if (MessageConst.MESSAGE_SCANCODE_WAITMSG.equals(event)) {
+            } else if (WeiXinMessageConst.MESSAGE_SCANCODE_WAITMSG.equals(event)) {
                 //垃圾巡检|扫码领袋
 
-            } else if (MessageConst.MESSAGE_SCANCODE_PUSH.equals(event)) {
+            } else if (WeiXinMessageConst.MESSAGE_SCANCODE_PUSH.equals(event)) {
 
                 //扫码领袋
                 weiXinScanCodePushEventHandler.handle(body);
 
-            } else if (MessageConst.MERCHANT_ORDER.equals(event)) {
+            } else if (WeiXinMessageConst.MERCHANT_ORDER.equals(event)) {
 
-            } else if (MessageConst.MESSAGE_SCAN.equals(event)
-                    || MessageConst.MESSAGE_VIEW.equals(event)) {
+            } else if (WeiXinMessageConst.MESSAGE_SCAN.equals(event)
+                    || WeiXinMessageConst.MESSAGE_VIEW.equals(event)) {
 
+            }else if (WeiXinMessageConst.MESSAGE_LOCATION.equals(event)) {
+
+                weiXinLocationEventHandler.handle(body);
             }
 
         }

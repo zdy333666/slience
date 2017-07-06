@@ -14,5 +14,6 @@ import com.lyzhkj.weixin.common.pojo.AccessToken;
 public class Cache {
 
     public static AccessToken accessToken;
+    public static String jsapi_ticket;
 
 }

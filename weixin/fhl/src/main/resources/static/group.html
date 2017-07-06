@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta charset="UTF-8">
+        <title></title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <link rel="stylesheet" type="text/css" href="css/add.css">
+    </head>
+    <body>
+
+        <div id="wrap">
+            <!-- 遮罩层 -->
+            <div class="mask"></div>
+            <!-- 移除成员 -->
+            <div class="delete-member">
+                <p class="delete-member-content">
+                    移除该成员
+                </p>
+                <p class="delete-member-button">
+                    <a class="yes" href="#" onclick="confirmDelete(true)">是</a>
+                    <a class="no" href="#" onclick="confirmDelete(false)">否</a>
+                </p>
+            </div>
+            <!-- 添加成员 -->
+            <div class="add-member">
+                <div class="add-member-content">
+                    <p>已添加</p>
+                    <p class="big-font">13064789012</p>
+                    <p>至</p>
+                    <p class="big-font">杭州电子机械厂</p>
+                </div>
+                <p><a href="#">确认</a></p>
+            </div>
+            <!-- 没有权限 -->
+            <div class="no-root">
+                <div class="no-root-content">
+                    <p>很抱歉！</p>
+                    <p>您没有添加权限</p>
+                </div>
+                <p><a href="#">确认</a></p>
+            </div>
+
+
+            <div id="group-main">
+                <div class="group-main-content">
+                    <div class="search clearfix">
+                        <p class="fl clearfix">
+                            <img src="img/search.png" alt="">
+                            <input id="searchPhone" type="text"  placeholder="请输入群组成员搜索号码">
+                            <a class="fr" href="#" onclick="searchByPhoneno()">搜索</a>
+                        </p>
+                        <p class="fr">
+                            <a href="#"><img src="img/add.png" alt="" onclick="scanFunction()"></a>
+                        </p>
+                    </div>
+                    <div class="main-content clearfix">
+                        <div class="clearfix">
+                            <div class="main-content-block fl">
+                                <p class="score" id="scoreCount"></p>
+                                <p>群积分</p>
+                            </div>
+                            <div class="main-content-block fl">
+                                <p class="member" id="memberCount"></p>
+                                <p>群成员</p>
+                            </div>
+                        </div>
+                        <div class="erweima">
+                            <p><a href="#" class="active">厨余</a><a href="#">其他</a></p>
+                            <img src="#" alt="" id="kitchenQR">
+                            <img src="#" alt="" id="otherQR">
+                            <!--                                img/erweima.png-->
+                        </div>
+                    </div>
+                    <ul class="content-list" id="memberList">
+                        <!--                        <li class="clearfix">
+                                                    <p class="fl">
+                                                        <span class="title">13064785912</span>
+                                                        <span class="admin">管理员</span>
+                                                    </p>
+                                                    <p class="fl center">
+                                                        <span class="title">3456</span>
+                                                        <span>积分</span>
+                                                    </p>
+                                                    <p class="fr">
+                                                        <a href="#"><img src="img/close.png" alt=""></a>
+                                                    </p>
+                                                </li>-->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript" src="js/add.js"></script>
+        <script type="text/javascript" src="js/group.js"></script>
+    </body>
+
+</html>

@@ -11,21 +11,21 @@ package com.lyzhkj.fhl.pojo;
  */
 public class GarRole {
 
-    private int roleId;
+    private int id;
     private String name;
 
     /**
-     * @return the roleId
+     * @return the id
      */
-    public int getRoleId() {
-        return roleId;
+    public int getId() {
+        return id;
     }
 
     /**
-     * @param roleId the roleId to set
+     * @param id the id to set
      */
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

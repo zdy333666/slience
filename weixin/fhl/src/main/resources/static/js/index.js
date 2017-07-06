@@ -1,49 +1,84 @@
 $(function() {
 	// 积分礼遇遮罩层
-	var $button=$("#scoregift-main .scoregift-main-content ul li .fr .clearfix button");
-	var $height=$(document).height();
-	$button.on("touchstart",function(){	
-		$("div.mask").height($height).show();
-		$(".change-score").show();
-	});
-	var $change=$(".change-score .bottom-change button");
-	$change.on("touchstart",function(){
-		$("div.mask").hide();
-		$(".change-score").hide();
-	});
+//	var $button=$("#scoregift-main .scoregift-main-content ul li .fr .clearfix button");
+var $height=$(document).height();
+//	$button.on("touchstart",function(){	
+//		$("div.mask").height($height).show();
+//		$(".change-score").show();
+//	});
+//	var $change=$(".change-score .bottom-change button");
+//	$change.on("touchstart",function(){
+//		$("div.mask").hide();
+//		$(".change-score").hide();
+//	});
+$("div.mask").on("touchstart",function(event){
+	$("div.mask").hide();
+	$(".change-score").hide();
+        return false;
+});
 
 	// 手机注销遮罩层
-	$("#phonenumber-main .phonenumber-main-content button:last-child").on("touchstart",function(){
-		$("div.mask_num").height($height).show();
-		$(".num_cancel").show();
-	});
-	$(".num_cancel p button").on("touchstart",function(){
+//	$("#phonenumber-main .phonenumber-main-content button:last-child").on("touchstart",function(event){
+//		$("div.mask_num").height($height).show();
+//		$(".num_cancel").show();
+//                return false;
+//	});
+//	$(".num_cancel p button").on("touchstart",function(event){
+//		$("div.mask_num").hide();
+//		$(".num_cancel").hide();
+//                 return false;
+//	});
+	$("div.mask_num").on("touchstart",function(event){
 		$("div.mask_num").hide();
 		$(".num_cancel").hide();
+		return false;
 	});
 
 	//我的兑换遮罩层
-	$("#myexchange-main .myexchange-main-content ul li .fr .clearfix button").on("touchstart",function(){
-		$("div.mask_myexchange").height($height).show();
-		$(".myexchange").show();
-	});
-	$(".myexchange button").on("touchstart",function(){
+//	$("#myexchange-main .myexchange-main-content ul li .fr .clearfix button").on("touchstart",function(){
+//		$("div.mask_myexchange").height($height).show();
+//		$(".myexchange").show();
+//	});
+//	$(".myexchange button").on("touchstart",function(event){
+//		$("div.mask_myexchange").hide();
+//		$(".myexchange").hide();
+//                 return false;
+//	});
+	$("div.mask_myexchange").on("touchstart",function(event){
 		$("div.mask_myexchange").hide();
 		$(".myexchange").hide();
+                return false;
 	});
+
+	//知识库查询弹出窗
+//	$("#knowlege-main .knowlege-main-content .garbage-search .clearfix button").on("touchstart",function(){
+//		$("div.knowledge_mask").height($height).show();
+//		$(".knowledge_answer").show();
+//	});
+//	$("#knowlege-main .knowlege-main-content .garbage-kinds ul li").on("touchstart",function(){
+//		$("div.knowledge_mask").height($height).show();
+//		$(".knowledge_answer").show();
+//	});
+$(".knowledge_mask").on("touchstart",function(event){
+	$("div.knowledge_mask").hide();
+	$(".knowledge_answer").hide();
+        return false;
+});
+
 
     //设置容器为手机屏幕的高度
     window.onresize = function(){
-    	$("#bindpage-main").height($(window).height());
-    	$("#phonenumber-main").height($(window).height());
-    	$("#knowlege-main").height($(window).height());
-    	$("#myexchange-main").height($(window).height());
-    };
-    $("#bindpage-main").height($(window).height());
-    $("#phonenumber-main").height($(window).height());
-    $("#knowlege-main").height($(window).height());
-    $("#myexchange-main").height($(window).height());
-    
+    	$("#bindpage-main").css({"min-height":$height});
+    	$("#phonenumber-main").css({"min-height":$height});
+    	$("#knowlege-main").css({"min-height":$height});
+//    	$("#detail-main").height($(window).height());
+};
+$("#bindpage-main").css({"min-height":$height});
+$("#phonenumber-main").css({"min-height":$height});
+$("#knowlege-main").css({"min-height":$height});
+$("#myexchange-main").css({"min-height":$height});
+   $("#detail-main").css({"min-height":$height});
+
     // report页面动态监听长度
     $("#report-main .report-main-content ul li textarea").bind('input propertychange', function() {
     	$('#report-main .report-main-content ul li p.font-number span').html($(this).val().trim().length);
@@ -94,5 +129,7 @@ function imgRemove() {
 $(".z_file input").on("change",function(){
 	imgChange('z_photo','z_file');
 });
+
+
 
 });

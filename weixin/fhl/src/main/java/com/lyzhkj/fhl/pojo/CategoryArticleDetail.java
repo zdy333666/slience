@@ -5,15 +5,64 @@
  */
 package com.lyzhkj.fhl.pojo;
 
+import java.util.Date;
+
 /**
  *
  * @author breeze
  */
-public class CategoryArticleDetail extends CategoryArticleIntro {
+public class CategoryArticleDetail {
 
+    private long id;
+    private String title;
+    private String intro;
     private String content;
-    private int hitCount;
+    private String pic;
     private String bigPic;
+    private int hitCount;
+    private Date createTime;
+
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * @return the intro
+     */
+    public String getIntro() {
+        return intro;
+    }
+
+    /**
+     * @param intro the intro to set
+     */
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
 
     /**
      * @return the content
@@ -27,6 +76,34 @@ public class CategoryArticleDetail extends CategoryArticleIntro {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    /**
+     * @return the pic
+     */
+    public String getPic() {
+        return pic;
+    }
+
+    /**
+     * @param pic the pic to set
+     */
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    /**
+     * @return the bigPic
+     */
+    public String getBigPic() {
+        return bigPic;
+    }
+
+    /**
+     * @param bigPic the bigPic to set
+     */
+    public void setBigPic(String bigPic) {
+        this.bigPic = bigPic;
     }
 
     /**
@@ -44,17 +121,17 @@ public class CategoryArticleDetail extends CategoryArticleIntro {
     }
 
     /**
-     * @return the bigPic
+     * @return the createTime
      */
-    public String getBigPic() {
-        return bigPic;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
-     * @param bigPic the bigPic to set
+     * @param createTime the createTime to set
      */
-    public void setBigPic(String bigPic) {
-        this.bigPic = bigPic;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
 }

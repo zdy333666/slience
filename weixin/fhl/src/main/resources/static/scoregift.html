@@ -1,104 +1,106 @@
 <!DOCTYPE html>
 <html>
-<head>
- <meta name="renderer" content="webkit|ie-comp|ie-stand">
- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
- <title>积分礼遇</title>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
- <meta http-equiv="Cache-Control" content="no-siteapp">
- <meta name="apple-mobile-web-app-capable" content="yes">
- <meta name="mobile-web-app-capable" content="yes">
- <meta name="format-detection" content="telephone=no">
- <meta name="keywords" content="">
- <meta name="description" content="">
+    <head>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>积分礼遇</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
 
- <link rel="stylesheet" type="text/css" href="css/base.css">
- <link rel="stylesheet" type="text/css" href="css/index.css">
-</head>
-<body>
-  <div id="wrap">
-    <!-- <div id="header">
-      <a href="javascript:history.go(-1)" class="icon_1"><span><img src="img/left-back.png" alt=""></span>微信</a>
-      <h3>积分礼遇</h3>
-      <a href="personalcenter.html" class="icon_2"><span><img src="img/customer.png" alt=""></span></a>
-    </div> -->
-    <!-- 遮罩层 -->
-    <div class="mask"></div>
-    <!-- 兑换页面 -->
-    <div class="change-score">
-      <div class="border"></div>
-      <p class="title">支付详情</p>
-      <ul>
-        <li class="clearfix"><p class="fl">商品信息</p><p class="fr">百度10元代金券</p></li>
-        <li class="clearfix"><p class="fl">订单金额</p><p class="fr">0元</p></li>
-        <li class="clearfix"><p class="fl">订单积分</p><p class="fr">9积分</p></li>
-      </ul>
-      <div class="bottom-change">
-        <p>需付<span>9积分</span></p>
-        <button>立即兑换</button>
-      </div>
-    </div>
-    <div id="scoregift-main">
-      <div class="scoregift-main-content">
-        <div class="banner">
-          <img src="img/score-banner.png" alt="">
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- <div id="header">
+              <a href="javascript:history.go(-1)" class="icon_1"><span><img src="img/left-back.png" alt=""></span>微信</a>
+              <h3>积分礼遇</h3>
+              <a href="personalcenter.html" class="icon_2"><span><img src="img/customer.png" alt=""></span></a>
+            </div> -->
+            <!-- 遮罩层 -->
+            <div class="mask"></div>
+            <!-- 兑换页面 -->
+            <div class="change-score">
+                <div class="border"></div>
+                <p class="title">支付详情</p>
+                <ul>
+                    <li style="display: none"><p id="id"></p></li>
+                    <li class="clearfix"><p class="fl">商品信息</p><p class="fr"  id="name"></p></li>
+                    <li class="clearfix"><p class="fl">订单金额</p><p class="fr" id="price"></p></li>
+                    <li class="clearfix"><p class="fl">订单积分</p><p class="fr" id="unitprice"></p></li>
+                </ul>
+                <div class="bottom-change">
+                    <p>需付<span id="unitprice-need">9积分</span></p>
+                    <button id="exchange" onclick="exchange(this)">立即兑换</button>
+                </div>
+            </div>
+            <div id="scoregift-main">
+                <div class="scoregift-main-content">
+                    <div class="banner">
+                        <img src="img/score-banner.png" alt="">
+                    </div>
+                    <ul id="goodsList">
+                        <!--                        <li class="clearfix">
+                                                    <div class="fl"><img src="img/score.png" alt=""></div>
+                                                    <div class="fr">
+                                                        <p class="title">百度阅读10元代金券</p>
+                                                        <p class="subtitle">畅想阅读新方式</p>
+                                                        <p class="clearfix">
+                                                            <span class="fl">9积分</span>
+                                                            <button class="fr">立即兑换</button>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <div class="fl"><img src="img/score.png" alt=""></div>
+                                                    <div class="fr">
+                                                        <p class="title">百度阅读10元代金券</p>
+                                                        <p class="subtitle">畅想阅读新方式</p>
+                                                        <p class="clearfix">
+                                                            <span class="fl">9积分</span>
+                                                            <button class="fr">立即兑换</button>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <div class="fl"><img src="img/score.png" alt=""></div>
+                                                    <div class="fr">
+                                                        <p class="title">百度阅读10元代金券</p>
+                                                        <p class="subtitle">畅想阅读新方式</p>
+                                                        <p class="clearfix">
+                                                            <span class="fl">9积分</span>
+                                                            <button class="fr">立即兑换</button>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <div class="fl"><img src="img/score.png" alt=""></div>
+                                                    <div class="fr">
+                                                        <p class="title">百度阅读10元代金券</p>
+                                                        <p class="subtitle">畅想阅读新方式</p>
+                                                        <p class="clearfix">
+                                                            <span class="fl">9积分</span>
+                                                            <button class="fr">立即兑换</button>
+                                                        </p>
+                                                    </div>
+                                                </li>-->
+                    </ul>
+
+                </div>
+            </div>
+
         </div>
-        <ul>
-          <li class="clearfix">
-            <div class="fl"><img src="img/score.png" alt=""></div>
-            <div class="fr">
-              <p class="title">百度阅读10元代金券</p>
-              <p class="subtitle">畅想阅读新方式</p>
-              <p class="clearfix">
-                <span class="fl">9积分</span>
-                <button class="fr">立即兑换</button>
-              </p>
-            </div>
-          </li>
-          <li class="clearfix">
-            <div class="fl"><img src="img/score.png" alt=""></div>
-            <div class="fr">
-              <p class="title">百度阅读10元代金券</p>
-              <p class="subtitle">畅想阅读新方式</p>
-              <p class="clearfix">
-                <span class="fl">9积分</span>
-                <button class="fr">立即兑换</button>
-              </p>
-            </div>
-          </li>
-          <li class="clearfix">
-            <div class="fl"><img src="img/score.png" alt=""></div>
-            <div class="fr">
-              <p class="title">百度阅读10元代金券</p>
-              <p class="subtitle">畅想阅读新方式</p>
-              <p class="clearfix">
-                <span class="fl">9积分</span>
-                <button class="fr">立即兑换</button>
-              </p>
-            </div>
-          </li>
-          <li class="clearfix">
-            <div class="fl"><img src="img/score.png" alt=""></div>
-            <div class="fr">
-              <p class="title">百度阅读10元代金券</p>
-              <p class="subtitle">畅想阅读新方式</p>
-              <p class="clearfix">
-                <span class="fl">9积分</span>
-                <button class="fr">立即兑换</button>
-              </p>
-            </div>
-          </li>
-        </ul>
 
-      </div>
-    </div>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/dropload.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/scoregift.js"></script>
 
-  </div>
-
-</div>
-
-</body>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+    </body>
 </html>

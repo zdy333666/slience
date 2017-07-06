@@ -6,8 +6,8 @@
 package com.lyzhkj.fhl.controller;
 
 import com.lyzhkj.fhl.util.ToolsUtil;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import com.service.webservice.out.NoticeMessageResult;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -27,22 +27,22 @@ public class CaptchaController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CaptchaController.class);
 
     /**
-     * 获取手机验证码
+     * 生成并发送手机验证码
      *
      * @return
      */
-    @ApiOperation(value = "获取手机验证码", notes = "")
-    @ApiImplicitParam(name = "phoneno", value = "接收验证码的手机号码", required = true, paramType = "query", dataType = "String")
-
     @RequestMapping(value = "/captcha/phone", method = RequestMethod.GET)
     @ResponseBody
     public String createPhoneCaptcha(@RequestParam String phoneno) {
 
         String captcha = ToolsUtil.createCaptcha();
-//        NoticeMessageResult result = ToolsUtil.sendSMS(phoneno, captcha);
-//        if (result == null || result.getCode() != 0) {
-//            LOGGER.error("--- 发送短信验证码至手机" + phoneno + "失败！");
-//        }
+
+        LOGGER.error("-- send captcha:" + captcha + " to " + phoneno);
+
+        NoticeMessageResult result = ToolsUtil.sendSMS(phoneno, captcha);
+        if (result == null || result.getCode() != 0) {
+            LOGGER.error("-- send captcha:" + captcha + " to " + phoneno + " failed >>" + JSONObject.fromObject(result).toString());
+        }
 
         return captcha;
     }

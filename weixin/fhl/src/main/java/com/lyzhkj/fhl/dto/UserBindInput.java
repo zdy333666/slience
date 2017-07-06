@@ -12,21 +12,21 @@ package com.lyzhkj.fhl.dto;
 public class UserBindInput {
 
     private String openId;
-    private String username;
     private String phoneno;
+    private String region;
 
     /**
-     * @return the username
+     * @return the openId
      */
-    public String getUsername() {
-        return username;
+    public String getOpenId() {
+        return openId;
     }
 
     /**
-     * @param username the username to set
+     * @param openId the openId to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     /**
@@ -44,16 +44,17 @@ public class UserBindInput {
     }
 
     /**
-     * @return the openId
+     * @return the region
      */
-    public String getOpenId() {
-        return openId;
+    public String getRegion() {
+        return region;
     }
 
     /**
-     * @param openId the openId to set
+     * @param region the region to set
      */
-    public void setOpenId(String openId) {
-        this.openId = openId;
+    public void setRegion(String region) {
+        this.region = region;
     }
+
 }

@@ -28,6 +28,12 @@ public class WeiXinConfig {
     //令牌
     public static String ACCESS_TOKEN_URL;
 
+    //网页授权令牌
+    public static String WEB_ACCESS_TOKEN_URL;
+
+    //获取用户基本信息
+    public static String USER_INFO_URL;
+
     //获取二维码ticket
     public static String CREATE_QR_URL;
 
@@ -70,6 +76,9 @@ public class WeiXinConfig {
     //删除货架
     public static String DELETE_SHELF_URL;
 
+    //获取临时素材
+    public static String GET_MEDIA_URL;
+
     static {
         try {
             PropertiesConfiguration props = new PropertiesConfiguration();
@@ -77,10 +86,14 @@ public class WeiXinConfig {
             props.load("config/weixin.properties");
 
             TOKEN = props.getString("wx.token");
+
             APP_ID = props.getString("wx.appID");
             APP_SECRET = props.getString("wx.appSecret");
 
             ACCESS_TOKEN_URL = props.getString("wx.access_token_url");
+            WEB_ACCESS_TOKEN_URL = props.getString("wx.web_access_token_url");
+            USER_INFO_URL = props.getString("wx.user_info_url");
+
             CREATE_QR_URL = props.getString("wx.create_qr_url");
             GET_QR_IMAGE = props.getString("wx.get_qr_image");
 
@@ -99,6 +112,8 @@ public class WeiXinConfig {
             CREATE_SHELF_URL = props.getString("wx.create_shelf_url");
             GETALL_SHELIES_URL = props.getString("wx.getall_shelies_url");
             DELETE_SHELF_URL = props.getString("wx.delete_shelf_url");
+
+            GET_MEDIA_URL = props.getString("wx.get_media_url");
 
 //            logger.info(new StringBuilder("APP_ID").append(":").append(APP_ID).toString());
 //            logger.info(new StringBuilder("APP_SECRET").append(":").append(APP_SECRET).toString());

@@ -1,0 +1,287 @@
+html{
+    font-size:62.5%;
+    color:#333;
+    background:#EEEEEE;
+}
+body{
+    font-size:1.4rem;  
+}
+/*积分群组页面*/
+#scoregroup-main{
+    width:100%;
+}
+#scoregroup-main .scoregroup-main-content{
+    width:100%;
+}
+#scoregroup-main .scoregroup-main-content ul li{
+    padding:6% 4%;
+    background:#fff;
+    border-bottom:1px solid #EEEEEE;
+}
+#scoregroup-main .scoregroup-main-content ul li p span.title{
+    font-size:1.6rem;
+}
+#scoregroup-main .scoregroup-main-content ul li p.fl span.admin{
+    color:#fff;
+    padding:0.1rem 1rem;
+    margin-left:0.5rem;
+    background:#19C69F;
+    border-radius:0.2rem;
+}
+#scoregroup-main .scoregroup-main-content ul li p.fl span.member{
+    color:#fff;
+    padding:0.1rem 1rem;
+    margin-left:0.5rem;
+    background:#1993C6;
+    border-radius:0.2rem;
+}
+
+/*群组页面*/
+#group-main{
+    width:100%;
+}
+#group-main .group-main-content{
+    width:100%;
+}
+#group-main .group-main-content .search{
+    padding:4%;
+    border-bottom:1px solid #eee;
+    background:#fff;
+}
+#group-main .group-main-content .search p.fl{
+    display:inline-block;
+    width:75%;
+    background:#EEE;
+    padding:0.8rem 0.5rem;
+    border-radius:0.2rem;
+    height:2rem;
+    line-height:2rem;
+}
+#group-main .group-main-content .search p.fl img{
+    width:5%;
+}
+#group-main .group-main-content .search p.fl input{
+    border:none;
+    background:none;   
+}
+#group-main .group-main-content .search p.fl a{
+    color:#0DCBA9;
+}
+#group-main .group-main-content .search p.fr{
+    width:18%;
+}
+#group-main .group-main-content .search p.fr a{
+    width:100%;
+    padding:0.8rem 0;
+    background:#0DCBA9;
+    display:inline-block;
+    border-radius:0.2rem;
+    text-align:center;
+    height:2rem;
+    line-height:2rem;
+}
+#group-main .group-main-content .search p.fr a img{
+    width:40%;
+}
+#group-main .group-main-content .main-content{
+    width:100%;
+    background:#fff;
+}
+#group-main .group-main-content .main-content .main-content-block{
+    display:inline-block;
+    width:50%;
+    text-align:center;
+    padding:5% 0;
+}
+#group-main .group-main-content .main-content .main-content-block p:nth-child(2){
+    padding-bottom:2rem;
+    border-bottom:1px solid #eee;
+}
+#group-main .group-main-content .main-content .main-content-block p{
+    font-size:1.6rem;
+}
+#group-main .group-main-content .main-content .main-content-block .score{
+    margin-top:1rem;
+    font-size:2.4rem;
+    color:#0DCBA9;
+}
+#group-main .group-main-content .main-content .main-content-block .member{
+    margin-top:1rem;
+    font-size:2.4rem;
+    color:#1993C6;
+}
+#group-main .group-main-content .main-content .erweima{
+    width:50%;
+    margin:0 auto;
+    text-align:center;
+}
+#group-main .group-main-content .main-content .erweima p{
+    margin-bottom:2rem;
+    margin-top:0.5rem;
+}
+#group-main .group-main-content .main-content .erweima p a{
+    padding:0.5rem 2rem;
+    background:#DEDEDE;
+    color:#fff;
+}
+#group-main .group-main-content .main-content .erweima p a.active{
+    background:#0DCBA9;
+}
+#group-main .group-main-content .main-content .erweima p a:first-child{
+    border-radius:0.5rem 0 0 0.5rem;
+}
+#group-main .group-main-content .main-content .erweima p a:last-child{
+    border-radius:0 0.5rem 0.5rem 0;
+}
+#group-main .group-main-content .main-content .erweima img{
+    width:100%;
+    display:none;
+    margin-bottom:2rem;
+}
+#group-main .group-main-content .main-content .erweima img:nth-child(2){
+    display:block;
+}
+#group-main .group-main-content .content-list li{
+    background:#F8F8F8;
+    padding:4%;
+}
+#group-main .group-main-content .content-list li p .title{
+    font-size:1.6rem;
+}
+#group-main .group-main-content .content-list li p .admin{
+    padding:0.1rem 1rem;
+    background:#19C69F;
+    color:#fff;
+    border-radius:0.3rem;
+    margin-left:0.5rem;
+}
+#group-main .group-main-content .content-list li p.center{
+    margin-left:5%;
+}
+#group-main .group-main-content .content-list li p.fr{
+    text-align:right;
+}
+#group-main .group-main-content .content-list li p.fr a img{
+    width:60%;
+}
+
+/*群组页面遮罩层*/
+div.mask{
+    position:fixed;
+    width:100%;
+    background:rgba(0,0,0,0.3);
+    z-index:1000;
+    display:none;
+}
+/*删除成员*/
+.delete-member{
+    position:fixed;
+    width:70%;
+    left:15%;
+    background:#fff;
+    z-index:1001;
+    top:20%;
+    border-radius:0.5rem;
+    display:none;
+}
+.delete-member .delete-member-content{
+    font-size:1.8rem;
+    text-align:center;
+    padding:15%;
+    border-bottom:1px solid #F6F6F6;
+}
+.delete-member .delete-member-button{
+    width:100%;
+}
+.delete-member .delete-member-button a{
+    display:inline-block;
+    width:49%;
+    text-align:center;
+    padding:5% 0;
+    color:#4E99EF;
+}
+/*添加成员*/
+.add-member{
+    position:fixed;
+    width:70%;
+    left:15%;
+    background:#fff;
+    z-index:1001;
+    top:20%;
+    border-radius:0.5rem;
+    text-align:center;
+    display:none;
+}
+.add-member .add-member-content{
+    padding:15%;
+    border-bottom:1px solid #F6F6F6;
+}
+.add-member .add-member-content .big-font{
+    font-size:1.6rem;
+}
+.add-member>p a{
+    display:inline-block;
+    padding:5% 0;
+    font-size:1.6rem;
+    color:#4E9AEF;
+}
+/*没有权限*/
+.no-root{
+    position:fixed;
+    width:70%;
+    left:15%;
+    background:#fff;
+    z-index:1001;
+    top:20%;
+    border-radius:0.5rem;
+    text-align:center;
+    display:none;
+}
+.no-root .no-root-content{
+    font-size:1.6rem;
+    padding:15%;
+    border-bottom:1px solid #F6F6F6;
+}
+.no-root>p a{
+    display:inline-block;
+    padding:5% 0;
+    font-size:1.6rem;
+    color:#4E9AEF;
+}
+
+/*个人中心遮罩层*/
+div.personalcenter_mask{
+    position:fixed;
+    width:100%;
+    background:rgba(0,0,0,0.3);
+    z-index:1000;
+    display:block;
+}
+.personalcenter_attitude{
+    position:fixed;
+    width:70%;
+    left:15%;
+    background:#fff;
+    z-index:1001;
+    top:20%;
+    border-radius:0.5rem;
+    text-align:center;
+}
+.personalcenter_attitude .personalcenter_attitude-content{
+    padding:15%;
+    border-bottom:1px solid #F6F6F6;
+}
+.personalcenter_attitude .personalcenter_attitude-content p:first-child{
+    margin-bottom:0.5rem;
+}
+.personalcenter_attitude .personalcenter_attitude-content p.big-font{
+    font-size:1.6rem;
+}
+.personalcenter_attitude .personalcenter_attitude-button a{
+    display:inline-block;
+    padding:5% 0;
+    font-size:1.6rem;
+    color:#4E9AEF;
+    text-align:center;
+    width:49%;
+}

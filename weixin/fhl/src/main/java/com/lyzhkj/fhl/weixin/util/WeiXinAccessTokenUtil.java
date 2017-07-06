@@ -23,9 +23,9 @@ public class WeiXinAccessTokenUtil {
 
     public static AccessToken getAccessToken() {
         //return new RestTemplate().getForObject(FHLConfig.WEIXIN_TOKEN_SERVER, AccessToken.class);
-        if(Cache.accessToken==null){
-            Cache.accessToken=WeiXinAccessTokenUtil.getAccessToken(WeiXinConfig.ACCESS_TOKEN_URL, WeiXinConfig.APP_ID, WeiXinConfig.APP_SECRET);
-        } 
+        if (Cache.accessToken == null) {
+            Cache.accessToken = getAccessToken(WeiXinConfig.ACCESS_TOKEN_URL, WeiXinConfig.APP_ID, WeiXinConfig.APP_SECRET);
+        }
         return Cache.accessToken;
     }
 

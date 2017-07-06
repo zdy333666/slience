@@ -11,9 +11,6 @@ import com.lyzhkj.fhl.service.UserService;
 import com.lyzhkj.fhl.weixin.util.WeiXinAccessTokenUtil;
 import com.lyzhkj.fhl.weixin.util.WeiXinKFUtil;
 import com.lyzhkj.weixin.common.pojo.AccessToken;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -46,9 +43,6 @@ public class UserController {
      * @param phoneno
      * @return
      */
-    @ApiOperation(value = "跳转用户绑定页面", notes = "")
-    @ApiImplicitParam(name = "openId", value = "用户的openId", required = true, paramType = "query", dataType = "String")
-
     @RequestMapping(value = "/user-bind", method = RequestMethod.GET)
     public void userBindIndex(HttpServletResponse response, @RequestParam("openId") String openId) throws IOException {
         LOGGER.info("-------------- user-bind index---------------------openId:" + openId);
@@ -64,43 +58,69 @@ public class UserController {
      * @param phoneno
      * @return
      */
-    @ApiOperation(value = "用户绑定", notes = "执行用户绑定数据操作")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "openId", value = "用户的openId", required = true, paramType = "query", dataType = "String")
-        ,
-        @ApiImplicitParam(name = "username", value = "用户名称", required = true, paramType = "query", dataType = "String")
-        ,
-        @ApiImplicitParam(name = "phoneno", value = "用户手机号码", required = true, paramType = "query", dataType = "String")
-    })
-
     @RequestMapping(value = "/user-bind/add", method = RequestMethod.GET)
     @ResponseBody
-    public boolean userBind(@RequestParam String openId, @RequestParam String username, @RequestParam String phoneno) {
+    public int userBind(@RequestParam String openId, @RequestParam String phoneno, @RequestParam String region) {//, @RequestParam String roleType) {
 
         LOGGER.info("userBind--openId-->" + openId);
-        LOGGER.info("userBind--username-->" + username);
         LOGGER.info("userBind--phoneno-->" + phoneno);
+        LOGGER.info("userBind--region-->" + region);
 
         UserBindInput input = new UserBindInput();
         input.setOpenId(openId);
-        input.setUsername(username);
         input.setPhoneno(phoneno);
+        input.setRegion(region);
+
+        int n = 0;
 
         //检查用户是否已绑定
         if (userService.checkUserBind(openId)) {
             AccessToken token = WeiXinAccessTokenUtil.getAccessToken();
-            String message = UserBindHelper.buildUserBindRepeatNotifyMessage(openId);
+            String message = UserBindHelper.buildBindUserRepeatNotifyMessage(openId);
             WeiXinKFUtil.sendMessage(token.getAccessToken(), message);
-            return true;
+            return 1;
         }
+
         //
-        if (userService.userBind(input)) {
+        n = userService.bindUser(input);
+        if (n == 1) {
             AccessToken token = WeiXinAccessTokenUtil.getAccessToken();
-            String message = UserBindHelper.buildUserBindSuccessNotifyMessage(openId);
+            String message = UserBindHelper.buildBindUserSuccessNotifyMessage(openId);
             WeiXinKFUtil.sendMessage(token.getAccessToken(), message);
         }
 
-        return true;
+        return n;
+    }
+
+    /**
+     * 用户解绑
+     *
+     * @param openId
+     * @return
+     */
+    @RequestMapping(value = "/user-bind/logoff", method = RequestMethod.GET)
+    @ResponseBody
+    public boolean userLogoff(@RequestParam String openId) {
+
+        LOGGER.info("userLogoff--openId-->" + openId);
+
+        return userService.userLogoff(openId);
+    }
+
+    /**
+     * 用户更换绑定的手机号码
+     *
+     * @param openId
+     * @return
+     */
+    @RequestMapping(value = "/user-bind/changephone", method = RequestMethod.GET)
+    @ResponseBody
+    public int changeBindPhone(@RequestParam String openId, @RequestParam String phoneno) {
+
+        LOGGER.info("changephone--openId-->" + openId);
+        LOGGER.info("changephone--phoneno-->" + phoneno);
+
+        return userService.changeBindPhone(openId, phoneno);
     }
 
 }

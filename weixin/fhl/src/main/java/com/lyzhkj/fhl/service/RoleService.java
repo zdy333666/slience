@@ -7,7 +7,6 @@ package com.lyzhkj.fhl.service;
 
 import com.lyzhkj.fhl.dao.GarRoleDAO;
 import com.lyzhkj.fhl.pojo.GarRole;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +20,9 @@ public class RoleService {
     @Autowired
     private GarRoleDAO garRoleDAO;
     
-    public List<GarRole> findRolesByUserId(String userId){
-        
-        return garRoleDAO.findRolesByUserId(userId);
-    }
+    public GarRole findRoleByUserId(String userId){
+    
+        return garRoleDAO.findRoleByUserId(userId);
+}
+    
 }

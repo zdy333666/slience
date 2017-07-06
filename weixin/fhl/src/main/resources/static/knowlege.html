@@ -1,66 +1,76 @@
 <!DOCTYPE html>
 <html>
-<head>
-   <meta name="renderer" content="webkit|ie-comp|ie-stand">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-   <title>分类知识库</title>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-   <meta http-equiv="Cache-Control" content="no-siteapp">
-   <meta name="apple-mobile-web-app-capable" content="yes">
-   <meta name="mobile-web-app-capable" content="yes">
-   <meta name="format-detection" content="telephone=no">
-   <meta name="keywords" content="">
-   <meta name="description" content="">
+    <head>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>分类知识库</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
 
-   <link rel="stylesheet" type="text/css" href="css/base.css">
-   <link rel="stylesheet" type="text/css" href="css/index.css">
-</head>
-<body>
-    <div id="wrap">
-        <!-- <div id="header">
-            <a href="javascript:history.go(-1)" class="icon_1"><span><img src="img/left-back.png" alt=""></span>微信</a>
-            <h3>垃圾去哪儿</h3>
-            <a href="personalcenter.html" class="icon_2"><span><img src="img/customer.png" alt=""></span></a>
-        </div> -->
-        <div id="knowlege-main">
-            <div class="knowlege-main-content">
-                <div class="garbage-search">
-                    <div class="padding-content">
-                        <p class="title">垃圾归属查询</p>
-                        <div class="clearfix">
-                            <p class="fl"><img src="img/search.png" alt=""></p>
-                            <input class="fl" type="text" name="" placeholder="输入搜索内容">
-                            <button class="fr">搜索</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="garbage-kinds">
-                    <ul class="clearfix">
-                        <li>
-                            <img src="img/garbage1.png" alt="">
-                            <p>餐余垃圾</p>
-                        </li>
-                        <li>
-                            <img src="img/garbage2.png" alt="">
-                            <p>可回收垃圾</p>
-                        </li>
-                        <li>
-                            <img src="img/garbage3.png" alt="">
-                            <p>有害垃圾</p>
-                        </li>
-                        <li>
-                            <img src="img/garbage4.png" alt="">
-                            <p>其他垃圾</p>
-                        </li>
-                    </ul>
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- <div id="header">
+                <a href="javascript:history.go(-1)" class="icon_1"><span><img src="img/left-back.png" alt=""></span>微信</a>
+                <h3>垃圾去哪儿</h3>
+                <a href="personalcenter.html" class="icon_2"><span><img src="img/customer.png" alt=""></span></a>
+              </div> -->
+            <div class="knowledge_mask"></div>
+            <!-- 分类知识弹出框 -->
+            <div class="knowledge_answer">
+                <div class="content_bg">
+                    <p class="title"></p>
+                    <p class="content"></p>
                 </div>
             </div>
+            <div id="knowlege-main">
+                <div class="knowlege-main-content">
+                    <div class="garbage-search">
+                        <div class="padding-content">
+                            <p class="title">垃圾归属查询</p>
+                            <div class="clearfix">
+                                <p class="fl"><img src="img/search.png" alt=""></p>
+                                <input class="fl" type="text" id="word" placeholder="输入搜索内容">
+                                <button class="fr" onclick="searchAndView()">搜索</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="garbage-kinds">
+                        <ul class="clearfix">
+                            <li id="2" onclick="viewDescription(this)">
+                                <img src="img/garbage1.png" alt="">
+                                <p></p>
+                            </li>
+                            <li id="3" onclick="viewDescription(this)">
+                                <img src="img/garbage2.png" alt="">
+                                <p></p>
+                            </li>
+                            <li id="4" onclick="viewDescription(this)">
+                                <img src="img/garbage3.png" alt="">
+                                <p></p>
+                            </li>
+                            <li id="5" onclick="viewDescription(this)">
+                                <img src="img/garbage4.png" alt="">
+                                <p></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-    </div>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/knowledge.js"></script>
 
-</body>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+    </body>
 </html>

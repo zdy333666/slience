@@ -8,8 +8,9 @@ package com.lyzhkj.fhl.handler;
 import com.lyzhkj.fhl.helper.UserBindHelper;
 import com.lyzhkj.fhl.service.SubscribeService;
 import com.lyzhkj.fhl.service.UserService;
+import com.lyzhkj.fhl.weixin.util.FHLConst;
 import com.lyzhkj.fhl.weixin.util.WeiXinAccessTokenUtil;
-import com.lyzhkj.fhl.weixin.util.WeiXinMessageUtil;
+import com.lyzhkj.fhl.weixin.util.WeiXinKFMessageUtil;
 import com.lyzhkj.weixin.common.pojo.AccessToken;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,17 +34,19 @@ public class WeiXinSubscribeEventHandler implements WeiXinEventHandler {
 
         String openId = body.get("FromUserName");
         String event = body.get("Event");
-        long createTime = Long.parseLong(body.get("CreateTime"));
 
         //发生用户关注事件并且此用户未曾绑定时向用户发生绑定提醒消息
-        if ("subscribe".equals(event) && (!userService.checkUserBind(openId))) {
-
+        if ("subscribe".equals(event)) {
             AccessToken token = WeiXinAccessTokenUtil.getAccessToken();
-            String msg = UserBindHelper.buildUserBindNotifyMessage(openId);
-            WeiXinMessageUtil.replyMessage(token.getAccessToken(), msg);
+            WeiXinKFMessageUtil.replyTextMessage(token.getAccessToken(), openId, FHLConst.SUBSCRIBE);
+
+            if (!userService.checkUserBind(openId)) {
+                String msg = UserBindHelper.buildBindUserNotifyMessage(openId);
+                WeiXinKFMessageUtil.replyMessage(token.getAccessToken(), msg);
+            }
         }
 
-        subscribeService.subscribe(openId, event, createTime);
+        subscribeService.subscribe(openId, event);
     }
 
 }

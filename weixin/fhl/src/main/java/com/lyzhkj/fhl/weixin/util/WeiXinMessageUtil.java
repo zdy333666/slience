@@ -89,18 +89,4 @@ public class WeiXinMessageUtil {
         return s.toString();
     }
 
-    /**
-     * 消息回复
-     *
-     * @param accessToken
-     * @return
-     * @throws ParseException
-     */
-    public static JSONObject replyMessage(String accessToken, String message) {
-        String url = WeiXinConfig.REPLY_MESSAGE_URL.replace("ACCESS_TOKEN", accessToken);
-        //String result = new RestTemplate().postForObject(url, message, String.class);
-
-        return HttpUtil.doPostStr(url, message);
-    }
-
 }

@@ -11,26 +11,12 @@ package com.lyzhkj.fhl.pojo;
  */
 public class IntegralOverview {
 
-    private int used;
-    private int total;
-    private int pick;
-    private int reused;
-    private int put;
-    private int activity;
-
-    /**
-     * @return the used
-     */
-    public int getUsed() {
-        return used;
-    }
-
-    /**
-     * @param used the used to set
-     */
-    public void setUsed(int used) {
-        this.used = used;
-    }
+    private int curr; //可兑换
+    private int total;//账户总积分
+    private int pick;//巡检积分
+    private int recycle;//可回收
+    private int put;//投放奖励
+    private int activity;//活动积分
 
     /**
      * @return the total
@@ -61,20 +47,6 @@ public class IntegralOverview {
     }
 
     /**
-     * @return the reused
-     */
-    public int getReused() {
-        return reused;
-    }
-
-    /**
-     * @param reused the reused to set
-     */
-    public void setReused(int reused) {
-        this.reused = reused;
-    }
-
-    /**
      * @return the put
      */
     public int getPut() {
@@ -100,6 +72,34 @@ public class IntegralOverview {
      */
     public void setActivity(int activity) {
         this.activity = activity;
+    }
+
+    /**
+     * @return the curr
+     */
+    public int getCurr() {
+        return curr;
+    }
+
+    /**
+     * @param curr the curr to set
+     */
+    public void setCurr(int curr) {
+        this.curr = curr;
+    }
+
+    /**
+     * @return the recycle
+     */
+    public int getRecycle() {
+        return recycle;
+    }
+
+    /**
+     * @param recycle the recycle to set
+     */
+    public void setRecycle(int recycle) {
+        this.recycle = recycle;
     }
 
 }

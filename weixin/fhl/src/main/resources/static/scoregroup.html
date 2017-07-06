@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>积分群组</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <link rel="stylesheet" type="text/css" href="css/add.css">
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="scoregroup-main">
+                <div class="scoregroup-main-content">
+                    <ul id="groupList">
+                        <!--          <li class="clearfix">
+                                    <p class="fl"><span class="title">杭州电子机械厂</span><span class="admin">管理员</span></p>
+                                    <p class="fr"><span class="title">3456</span><span class="score">积分</span></p>
+                                  </li>
+                                  <li class="clearfix">
+                                  <p class="fl"><span class="title">浙江大学华家池校区</span><span class="member">成员</span></p>
+                                    <p class="fr"><span class="title">3456</span><span class="score">积分</span></p>
+                                  </li>
+                                  <li class="clearfix">
+                                    <p class="fl"><span class="title">亲情组</span><span class="member">成员</span></p>
+                                    <p class="fr"><span class="title">2556</span><span class="score">积分</span></p>
+                                  </li>-->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script>
+            var url_base = window.location.protocol + "//" + window.location.host;
+            var port = window.location.port;
+            if (port !== '') {
+                url_base = url_base + ":" + port;
+            }
+
+            var search = window.location.search;
+            search = search.substring(1);
+            var openId = search.split("=")[1];
+
+            //跳转到群组详情页面
+            function groupDetail(s) {
+                var groupId = $(s).attr('data-id');
+                //var name = $(s).attr('data-name');
+
+                var url = "group.html?openId=" + openId + '&groupId=' + groupId;
+                window.location.href = url;
+            }
+
+            $(document).ready(function () {
+
+                var url = url_base + "/group/list?openId=" + openId;
+                var request = $.ajax({
+                    url: url,
+                    method: "GET",
+                    dataType: 'json'
+                });
+                request.done(function (data) {
+                    if (null === data || 0 === data.length) {
+                        alert("尚无群组信息");
+                        return;
+                    }
+
+                    var domList = $("#groupList");
+
+                    for (var i in data) {
+                        var row = data[i];
+
+                        var itemHtml = '<li class="clearfix" data-id=' + row.id + ' onclick=groupDetail(this)>';
+                        itemHtml += '<p class="fl"><span class="title">' + row.name + '</span><span class="admin">' + (row.isadmin ? '(管理员)' : '成员') + '</span></p>';
+                        itemHtml += '<p class="fr"><span class="title">' + row.score + '</span><span class="score">积分</span></p>';
+                        itemHtml += '</li>';
+
+                        domList.append(itemHtml);
+                    }
+                });
+
+                request.fail(function (jqXHR, textStatus) {
+                    //alert("Request failed: " + textStatus);
+                    alert('出错了');
+                });
+
+            });
+
+        </script>
+        
+    </body>
+</html>

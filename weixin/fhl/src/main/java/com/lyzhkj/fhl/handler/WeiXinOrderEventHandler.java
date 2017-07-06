@@ -7,6 +7,7 @@ package com.lyzhkj.fhl.handler;
 
 import com.lyzhkj.fhl.helper.UserBindHelper;
 import com.lyzhkj.fhl.weixin.util.WeiXinAccessTokenUtil;
+import com.lyzhkj.fhl.weixin.util.WeiXinKFMessageUtil;
 import com.lyzhkj.fhl.weixin.util.WeiXinMessageUtil;
 import com.lyzhkj.weixin.common.pojo.AccessToken;
 import java.util.Map;
@@ -26,8 +27,8 @@ public class WeiXinOrderEventHandler implements WeiXinEventHandler {
         if ("".equals(eventKey)) {
 
             AccessToken token = WeiXinAccessTokenUtil.getAccessToken();
-            String msg = UserBindHelper.buildUserBindNotifyKFMessage(openId);
-            WeiXinMessageUtil.replyMessage(token.getAccessToken(), msg);
+            String msg = UserBindHelper.buildBindUserNotifyKFMessage(openId);
+            WeiXinKFMessageUtil.replyTextMessage(token.getAccessToken(),openId, msg);
         }
     }
     
