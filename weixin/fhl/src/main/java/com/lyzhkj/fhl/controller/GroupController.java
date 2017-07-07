@@ -37,12 +37,6 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
-    /**
-     * 查询用户所属的群组列表信息
-     *
-     * @param openId
-     * @return
-     */
     @RequestMapping(value = "group/list", method = RequestMethod.GET)
     @ResponseBody
     public List<GroupOutput> listGroups(@RequestParam String openId) {
@@ -57,13 +51,6 @@ public class GroupController {
         return groupService.listIntro(user.getUserId());
     }
 
-    /**
-     * 查询指定群组的成员列表信息
-     *
-     * @param openId
-     * @param groupId
-     * @return
-     */
     @RequestMapping(value = "group/listMember", method = RequestMethod.GET)
     @ResponseBody
     public GroupMemberOutput listMember(@RequestParam String openId, @RequestParam String groupId) {
@@ -73,14 +60,6 @@ public class GroupController {
         return groupService.listMemberOfGroup(groupId);
     }
 
-    /**
-     * 删除指定群组中的单个成员
-     *
-     * @param openId
-     * @param groupId
-     * @param id
-     * @return
-     */
     @RequestMapping(value = "group/deleteMember", method = RequestMethod.GET)
     @ResponseBody
     public int deleteMember(@RequestParam String openId, @RequestParam String groupId, @RequestParam String id) {
@@ -90,14 +69,6 @@ public class GroupController {
         return groupService.deleteMemberOfGroup(openId, groupId, id);
     }
 
-    /**
-     * 根据手机号码搜索指定群组中的成员
-     *
-     * @param openId
-     * @param groupId
-     * @param phoneno
-     * @return
-     */
     @RequestMapping(value = "group/searchMember", method = RequestMethod.GET)
     @ResponseBody
     public SearchMemberResult searchMember(@RequestParam String openId, @RequestParam String groupId, @RequestParam String phoneno) {
@@ -113,14 +84,6 @@ public class GroupController {
         return result;
     }
 
-    /**
-     * 添加成员到指定群组
-     *
-     * @param openId
-     * @param groupId
-     * @param phoneno
-     * @return
-     */
     @RequestMapping(value = "group/addMember", method = RequestMethod.GET)
     @ResponseBody
     public int addMember(@RequestParam String openId, @RequestParam String groupId, @RequestParam String phoneno) {

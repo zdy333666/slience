@@ -46,13 +46,6 @@ public class PersonCenterController {
     @Autowired
     private GroupService groupService;
 
-    /**
-     * 跳转个人中心页面
-     * 
-     * @param response
-     * @param code
-     * @throws IOException 
-     */
     @RequestMapping(value = "person-center", method = RequestMethod.GET)
     public void personCenterIndex(HttpServletResponse response, @RequestParam("code") String code) throws IOException {
 
@@ -71,12 +64,6 @@ public class PersonCenterController {
         response.sendRedirect("/personalcenter.html?openId=" + openId);
     }
 
-    /**
-     * 查询个人中心页信息
-     * 
-     * @param openId
-     * @return 
-     */
     @RequestMapping(value = "person-center/overview", method = RequestMethod.GET)
     @ResponseBody
     public PersonCenterMainOutput overview(@RequestParam String openId) {

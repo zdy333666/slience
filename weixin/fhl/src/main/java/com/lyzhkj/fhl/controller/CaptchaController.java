@@ -27,7 +27,7 @@ public class CaptchaController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CaptchaController.class);
 
     /**
-     * 生成并发送手机验证码
+     * 获取手机验证码
      *
      * @return
      */

@@ -21,7 +21,6 @@ import java.util.UUID;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -151,15 +150,6 @@ public class WeiXinMediaUtil {
             LOGGER.error("", e);
         }
         return qrMediaId;
-    }
-
-    public static byte[] download(String accessToken, String mediaId) {
-
-        String url = WeiXinConfig.GET_MEDIA_URL.replace("ACCESS_TOKEN", accessToken).replace("MEDIA_ID", mediaId);
-
-        byte[] data = new RestTemplate().getForObject(url, byte[].class);
-
-        return data;
     }
 
 }

@@ -29,11 +29,27 @@ public class GarUserDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public boolean checkUserCloudExistByOpenId(String openId) {
-
-        return jdbcTemplate.queryForRowSet("SELECT openId FROM gar_UserCloud WHERE openId=?", openId).first();
-    }
-
+//    public boolean checkUserExist(String openId) {
+//
+//        return jdbcTemplate.queryForRowSet("SELECT openId FROM gar_Users WHERE openId=?", openId).first();
+//    }
+//
+//    public boolean checkUserCloudExist(String openId) {
+//
+//        return jdbcTemplate.queryForRowSet("SELECT openId FROM gar_UserCloud WHERE openId=?", openId).first();
+//    }
+//    public boolean checkUserBind(String openId) {
+//        GarUser user = findUserByOpenId(openId);
+//        if (user == null) {
+//            return false;
+//        }
+//        String phoneno = user.getMobilephone();
+//        if (phoneno == null || phoneno.trim().isEmpty()) {
+//            return false;
+//        }
+//
+//        return true;
+//    }
     public boolean checkUserIsCashierByPhone(String phoneno) {
 
         return jdbcTemplate.queryForRowSet("SELECT userId FROM gar_Users WHERE userType=3 AND mobilephone=?", phoneno).first();

@@ -67,15 +67,15 @@ public class WeiXinRequestDispatcher {
             } else if (WeiXinMessageConst.MESSAGE_SCANCODE_WAITMSG.equals(event)) {
                 //垃圾巡检|扫码领袋
 
-            } else if (WeiXinMessageConst.MESSAGE_SCANCODE_PUSH.equals(event)) {
+            } else if (//WeiXinMessageConst.MESSAGE_SCANCODE_PUSH.equals(event)||
+                    WeiXinMessageConst.MESSAGE_SCAN.equals(event)) {
 
                 //扫码领袋
                 weiXinScanCodePushEventHandler.handle(body);
 
             } else if (WeiXinMessageConst.MERCHANT_ORDER.equals(event)) {
 
-            } else if (WeiXinMessageConst.MESSAGE_SCAN.equals(event)
-                    || WeiXinMessageConst.MESSAGE_VIEW.equals(event)) {
+            } else if (WeiXinMessageConst.MESSAGE_VIEW.equals(event)) {
 
             }else if (WeiXinMessageConst.MESSAGE_LOCATION.equals(event)) {
 

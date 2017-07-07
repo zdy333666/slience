@@ -7,6 +7,7 @@ package com.lyzhkj.fhl.controller;
 
 import com.lyzhkj.fhl.dto.PolicyPage;
 import com.lyzhkj.fhl.pojo.CategoryArticleDetail;
+import com.lyzhkj.fhl.pojo.CategoryArticleIntro;
 import com.lyzhkj.fhl.pojo.GarUser;
 import com.lyzhkj.fhl.service.CategoryPolicyService;
 import com.lyzhkj.fhl.service.UserService;
@@ -14,6 +15,7 @@ import com.lyzhkj.fhl.weixin.util.WeiXinUserUtil;
 import com.lyzhkj.weixin.common.pojo.WebPageAccessToken;
 import com.lyzhkj.weixin.common.pojo.WeiXinUserBaseInfo;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -75,7 +77,8 @@ public class CategoryPolicyController {
 
         String city = null;
 
-        //long st = System.currentTimeMillis();
+        long st = System.currentTimeMillis();
+
         GarUser user = userService.findUserByOpenId(openId);
         if (user != null) {
             city = user.getCity();
@@ -88,9 +91,11 @@ public class CategoryPolicyController {
         if (city == null || city.trim().isEmpty()) {
             city = "杭州";
         }
+        
+        //LOGGER.info("-----city:"+city);
 
         PolicyPage result = categoryPolicyService.listPolicy(city, page, size);
-        //LOGGER.info("spend time : " + (System.currentTimeMillis() - st) + " ms");
+        LOGGER.info("spend time : " + (System.currentTimeMillis() - st) + " ms");
 
         return result;
     }
@@ -106,9 +111,9 @@ public class CategoryPolicyController {
     @ResponseBody
     public CategoryArticleDetail policyDetail(long id) {
 
-        //long st = System.currentTimeMillis();
+        long st = System.currentTimeMillis();
         CategoryArticleDetail result = categoryPolicyService.policyDetail(id);
-        //LOGGER.info("spend time : " + (System.currentTimeMillis() - st) + " ms");
+        LOGGER.info("spend time : " + (System.currentTimeMillis() - st) + " ms");
 
         return result;
     }

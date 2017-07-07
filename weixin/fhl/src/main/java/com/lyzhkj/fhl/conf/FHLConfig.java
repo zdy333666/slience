@@ -29,6 +29,11 @@ public class FHLConfig {
     public static String JPUSH_APP_KEY;
     public static String JPUSH_MASTER_SECRET;
 
+    public static String IGTPUSH_APPID;
+    public static String IGTPUSH_APPKEY;
+    public static String IGTPUSH_MASTER;
+    public static String IGTPUSH_HOST;
+
     static {
         try {
             PropertiesConfiguration props = new PropertiesConfiguration();
@@ -45,6 +50,11 @@ public class FHLConfig {
             NET_SERVER_PORT = props.getInt("fhl.netServerPort");
             JPUSH_APP_KEY = props.getString("fhl.jpush_app_key");
             JPUSH_MASTER_SECRET = props.getString("fhl.jpush_master_secret");
+
+            IGTPUSH_APPID = props.getString("fhl.igtpush_appId");
+            IGTPUSH_APPKEY = props.getString("fhl.igtpush_appKey");
+            IGTPUSH_MASTER = props.getString("fhl.igtpush_master");
+            IGTPUSH_HOST = props.getString("fhl.igtpush_host");
 
             props = null;
 

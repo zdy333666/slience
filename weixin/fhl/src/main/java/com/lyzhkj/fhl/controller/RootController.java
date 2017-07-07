@@ -31,7 +31,7 @@ public class RootController {
     private static final Logger LOGGER = LoggerFactory.getLogger(RootController.class);
 
     /**
-     *用于系统正常状态测试
+     *
      * @return
      */
     @RequestMapping("/")
@@ -45,7 +45,7 @@ public class RootController {
     }
 
     /**
-     *用于创建微信公众号菜单
+     *
      * @return
      */
     @RequestMapping(value = "/menu", method = RequestMethod.GET)

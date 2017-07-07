@@ -18,8 +18,11 @@ import com.lyzhkj.fhl.weixin.util.WeiXinAccessTokenUtil;
 import com.lyzhkj.fhl.weixin.util.WeiXinKFMessageUtil;
 import com.lyzhkj.weixin.common.pojo.AccessToken;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.lyzhkj.fhl.util.OtherUtil;
 
 /**
  * 扫码领袋菜单-处理
@@ -28,6 +31,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ScanCodeAndGetGarbageBagService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ScanCodeAndGetGarbageBagService.class);
 
     @Autowired
     private GarCitizenDAO garCitizenDAO;
@@ -43,7 +48,6 @@ public class ScanCodeAndGetGarbageBagService {
         AccessToken token = WeiXinAccessTokenUtil.getAccessToken();
 
         //测试用
-        //String test_openId = "oZ14ywpD0nisKFUXutC0dtm5sCrI";
         GarUser user = garUserDAO.findUserCloudByOpenId(openId);
         if (user == null) {
             WeiXinKFMessageUtil.replyTextMessage(token.getAccessToken(), openId, "使用此功能需要您绑定业主身份");
@@ -57,15 +61,11 @@ public class ScanCodeAndGetGarbageBagService {
             return;
         }
 
-//        AccessToken token = WeiXinAccessTokenUtil.getAccessToken();
-//        //String ticket = WeiXinQrUtil.getQrTicket(token.getAccessToken(), garCitizen.getKitchenQR());
-//        //String qrUrl = WeiXinQrUtil.getQrURL(ticket);
-//        byte[] qrData = QRCreateUtil.createQR(garCitizen.getKitchenQR());
-//        String mediaId = WeiXinMediaUtil.upload(token.getAccessToken(), "image", qrData);
-//        WeiXinKFMessageUtil.replyImageMessage(token.getAccessToken(), openId, mediaId);
         try {
             //从扫描的机器二维码获得对应的jpushregid
             Map<String, String> jpushmap = garTerminalDAO.getJpushIdByTerminalNo(scanResult);
+            LOGGER.info(scanResult + " --> " + jpushmap);
+
             String jpushregid = jpushmap.get("jpushregid");
             if (jpushregid == null) {
                 WeiXinKFMessageUtil.replyTextMessage(token.getAccessToken(), openId, FHLConst.INFO_VOID_QR);
@@ -75,7 +75,10 @@ public class ScanCodeAndGetGarbageBagService {
             //提示扫描结果去服务器验证 是否可以领取垃圾袋
             String result = getCheckResult(scanResult, garCitizen.getKitchenQR());
             if ("ok".equals(result)) {
-                if (callTerminal(garCitizen.getKitchenQR(), jpushregid)) {
+
+                String jpushtype = jpushmap.get("jpushtype");
+
+                if (callTerminal(garCitizen.getKitchenQR(), jpushregid, jpushtype)) {
                     WeiXinKFMessageUtil.replyTextMessage(token.getAccessToken(), openId, FHLConst.INFO_TERMINAL_SUCESS);
                 } else {
                     WeiXinKFMessageUtil.replyTextMessage(token.getAccessToken(), openId, FHLConst.INFO_TERMINAL_SYSTEMERR);
@@ -114,16 +117,20 @@ public class ScanCodeAndGetGarbageBagService {
      * @param kitchenQR
      * @return
      */
-    public boolean callTerminal(String kitchenQR, String jpushregid) {
+    public boolean callTerminal(String kitchenQR, String jpushregid, String jpushtype) {
         //给垃圾袋发放机推送掉垃圾袋的消息 采用极光推送
         boolean rtn = true;
         //验证密钥是固定的
         String pushstr = "wxtranid=" + kitchenQR + "&sign=83bc48f2cef78fd6ea8efc6e68a4bfd6&nonce=zbgzt3xcj0yfhqg3";
         try {
-            System.out.println("---------给垃圾袋发放机推送掉垃圾袋的消息 采用极光推送 >" + kitchenQR);
-            new JPushClient(FHLConfig.JPUSH_MASTER_SECRET, FHLConfig.JPUSH_APP_KEY).sendAndroidMessageWithRegistrationID("title", pushstr, jpushregid);
+            LOGGER.info("callTerminal", "pushstr:" + pushstr + "  jpushtype:" + jpushtype + "  jpushregid:" + jpushregid);
+            if ("1".equals(jpushtype)) {
+                OtherUtil.iGtPush(pushstr, jpushregid, kitchenQR);
+            } else {
+                new JPushClient(FHLConfig.JPUSH_MASTER_SECRET, FHLConfig.JPUSH_APP_KEY).sendAndroidMessageWithRegistrationID("title", pushstr, jpushregid);
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("", e);
             rtn = false;
         }
 

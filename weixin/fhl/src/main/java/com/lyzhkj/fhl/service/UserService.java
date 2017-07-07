@@ -49,6 +49,23 @@ public class UserService {
         return garCashierDAO.findGarCashierByPhone(user.getMobilephone());
     }
 
+//    //检查用户是否已进行绑定
+//    public boolean checkUserBind(String openId, String roleType) {
+//
+//        if ("1".equals(roleType)) {  //业主
+//            return garCitizenDAO.checkUserIsCitizen(openId);
+//        } else if ("2".equals(roleType)) { //商户
+//            return garUserDAO.checkUserIsMerchant(openId);
+//        } else if ("3".equals(roleType)) {//收银员
+//            return garUserDAO.checkUserIsCashier(openId);
+//        } else if ("4".equals(roleType)) {//巡检员
+//            return garPickerDAO.getGarPickerById(openId) == null;
+//        } else if ("5".equals(roleType)) {//市民
+//            return garUserDAO.checkUserBind(openId);
+//        }
+//
+//        return false;
+//    }
     public boolean checkUserBind(String openId) {
 
         GarUser user = garUserDAO.findUserCloudByOpenId(openId);

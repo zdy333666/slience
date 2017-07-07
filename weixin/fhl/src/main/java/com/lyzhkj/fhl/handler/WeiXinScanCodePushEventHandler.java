@@ -23,17 +23,17 @@ public class WeiXinScanCodePushEventHandler implements WeiXinEventHandler {
     @Override
     public void handle(Map<String, String> body) {
 
-        String eventKey = body.get("EventKey");
+        //String eventKey = body.get("EventKey");
         String openId = body.get("FromUserName");
         //扫码领袋
-        if ("1022".equals(eventKey)) {
-            
-            String scanResult =body.get("ScanResult");
+        ///if ("1022".equals(eventKey)) {
 
-            //处理逻辑
-            ScanCodeAndGetGarbageBagService.service(openId,scanResult);
+        String scanResult = body.get("EventKey");// body.get("ScanResult");
 
-        }
+        //处理逻辑
+        ScanCodeAndGetGarbageBagService.service(openId, scanResult);
+
+        //}
     }
 
 }

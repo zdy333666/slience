@@ -42,26 +42,18 @@ public class WeiXinController {
     @Autowired
     private WeiXinRequestDispatcher weiXinRequestDispatcher;
 
-    /**
-     * 微信公众号接入入口
-     * 
-     * @param signature
-     * @param timestamp
-     * @param nonce
-     * @param echostr
-     * @return 
-     */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     @ResponseBody
     public String getPage(String signature, String timestamp,
             String nonce, String echostr) {
+//@RequestParam("signature")
 
         LOGGER.info("signature:" + signature);
         LOGGER.info("timestamp:" + timestamp);
         LOGGER.info("nonce:" + nonce);
         LOGGER.info("echostr:" + echostr);
 
-        LOGGER.info("weixin hello----------------------");
+        LOGGER.info("get hello----------------------");
 
         if (WeiXinSignatureCheckUtil.checkSignature(signature, timestamp, nonce)) {
             //原样返回echostr参数内容，接入生效
@@ -71,14 +63,6 @@ public class WeiXinController {
         return "";
     }
 
-    /**
-     * 接收(或回复)微信服务器下发的消息
-     * 
-     * @param request
-     * @param response
-     * @throws UnsupportedEncodingException
-     * @throws IOException 
-     */
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public void postPage(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {//,@RequestBody String body) {
         //request.setCharacterEncoding("UTF-8");
@@ -123,7 +107,7 @@ public class WeiXinController {
     }
 
     /**
-     * 微信JSSDK权限开通
+     * 扫码权限开通
      *
      * @param apiRoll
      * @param resp

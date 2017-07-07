@@ -13,33 +13,24 @@ import com.lyzhkj.fhl.service.UserService;
 import com.lyzhkj.fhl.weixin.util.FHLConst;
 import com.lyzhkj.fhl.weixin.util.WeiXinAccessTokenUtil;
 import com.lyzhkj.fhl.weixin.util.WeiXinKFMessageUtil;
-import com.lyzhkj.fhl.weixin.util.WeiXinMediaUtil;
 import com.lyzhkj.fhl.weixin.util.WeiXinUserUtil;
 import com.lyzhkj.weixin.common.pojo.AccessToken;
 import com.lyzhkj.weixin.common.pojo.WebPageAccessToken;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * 举报反馈
@@ -93,7 +84,7 @@ public class ReportFeedbackController {
      * @param unitprice
      * @return
      */
-    @RequestMapping(value = "/report-feedback/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "/report-feedback/upload", method = RequestMethod.GET)
     @ResponseBody
     public boolean upload(HttpServletRequest request) {
 
@@ -101,46 +92,23 @@ public class ReportFeedbackController {
         String userId = request.getParameter("userId");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        String imgIds = request.getParameter("imgIds");
 
         LOGGER.info("--------------------- upload openId -->" + openId);
         LOGGER.info("--------------------- upload userId -->" + userId);
         LOGGER.info("--------------------- upload title -->" + title);
         LOGGER.info("--------------------- upload content -->" + content);
-        LOGGER.info("--------------------- upload imgIds -->" + imgIds);
 
         ReportInput input = new ReportInput();
         input.setUserId(userId);
         input.setTitle(title);
         input.setContent(content);
 
-        AccessToken token = WeiXinAccessTokenUtil.getAccessToken();
-
-        if (!(imgIds == null || imgIds.trim().isEmpty())) {
-            //存储多张图片数据
-            JSONArray imgs = new JSONArray();
-
-            String[] imgIdsArray = imgIds.split(",");
-            for (String imgId : imgIdsArray) {
-                LOGGER.info("---------------------  imgId -->" + imgId);
-
-                byte[] data = WeiXinMediaUtil.download(token.getAccessToken(), imgId);
-                String imgBase64Str = Base64.getEncoder().encodeToString(data);
-
-                LOGGER.info("---------------------  img -->" + Base64.getEncoder().encodeToString(data));
-
-                imgs.add(new StringBuilder("data:image/webp;base64,").append(imgBase64Str).toString());
-            }
-
-            input.setImage(imgs.toString());
-        }
-
         boolean b = reportFeedbackService.report(input);
         if (b) {
             String message = MessageFormat.format(FHLConst.INFO_REPORT_SUCCESS,
                     new SimpleDateFormat("yyyy年MM月dd日").format(new Date()),
                     title);
-
+            AccessToken token = WeiXinAccessTokenUtil.getAccessToken();
             WeiXinKFMessageUtil.replyTextMessage(token.getAccessToken(), openId, message);
         }
 

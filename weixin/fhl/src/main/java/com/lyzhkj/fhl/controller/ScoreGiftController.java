@@ -73,7 +73,7 @@ public class ScoreGiftController {
     }
 
     /**
-     *查询可兑换的商品列表信息（支持分页）
+     *
      * @return
      */
     @RequestMapping(value = "/integral/goods", method = RequestMethod.GET)
@@ -90,7 +90,7 @@ public class ScoreGiftController {
     }
 
     /**
-     *查询单件商品的详细信息
+     *
      * @return
      */
     @RequestMapping(value = "/integral/goodsDetail", method = RequestMethod.GET)
@@ -101,7 +101,7 @@ public class ScoreGiftController {
     }
 
     /**
-     *单件商品兑换操作
+     *
      * @param openId
      * @param productId
      * @param unitprice

@@ -16,7 +16,6 @@ public class ReportInput {
     private String phone;
     private String title;
     private String content;
-    private String image;
 
     /**
      * @return the userId
@@ -86,20 +85,6 @@ public class ReportInput {
      */
     public void setContent(String content) {
         this.content = content;
-    }
-
-    /**
-     * @return the image
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(String image) {
-        this.image = image;
     }
 
 }
