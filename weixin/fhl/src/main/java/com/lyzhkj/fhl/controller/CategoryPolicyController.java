@@ -7,7 +7,6 @@ package com.lyzhkj.fhl.controller;
 
 import com.lyzhkj.fhl.dto.PolicyPage;
 import com.lyzhkj.fhl.pojo.CategoryArticleDetail;
-import com.lyzhkj.fhl.pojo.CategoryArticleIntro;
 import com.lyzhkj.fhl.pojo.GarUser;
 import com.lyzhkj.fhl.service.CategoryPolicyService;
 import com.lyzhkj.fhl.service.UserService;
@@ -15,7 +14,6 @@ import com.lyzhkj.fhl.weixin.util.WeiXinUserUtil;
 import com.lyzhkj.weixin.common.pojo.WebPageAccessToken;
 import com.lyzhkj.weixin.common.pojo.WeiXinUserBaseInfo;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;

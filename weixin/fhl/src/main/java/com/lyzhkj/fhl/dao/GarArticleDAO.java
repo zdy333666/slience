@@ -36,7 +36,7 @@ public class GarArticleDAO {
      * @return
      */
     public int count(String city) {
-        Map<String, Object> row = jdbcTemplate.queryForMap("SELECT count(1) AS count FROM gar_Article WHERE CategoryId=2 AND City=?", city);
+        Map<String, Object> row = jdbcTemplate.queryForMap("SELECT count(*) AS count FROM gar_Article WHERE CategoryId=2 AND City=?", city);
 
         return (int) row.get("count");
     }

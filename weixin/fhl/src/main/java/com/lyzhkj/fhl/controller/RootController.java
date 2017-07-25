@@ -12,6 +12,8 @@ import static com.lyzhkj.fhl.conf.WeiXinMenuConfig.initMenu;
 import com.lyzhkj.fhl.weixin.util.WeiXinAccessTokenUtil;
 import com.lyzhkj.fhl.weixin.util.WeiXinMenuUtil;
 import com.lyzhkj.weixin.common.pojo.AccessToken;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +41,11 @@ public class RootController {
     public String getPage() {
 
         String result = "test is ok";
-        System.out.println(result);
+
+        try {
+            result = new StringBuilder(InetAddress.getLocalHost().toString()).append(" : ").append(result).toString();
+        } catch (UnknownHostException ex) {
+        }
 
         return result;
     }

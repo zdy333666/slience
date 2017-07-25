@@ -82,7 +82,7 @@ public class ScanCodeAndGetGarbageBagService {
                     WeiXinKFMessageUtil.replyTextMessage(token.getAccessToken(), openId, FHLConst.INFO_TERMINAL_SUCESS);
                 } else {
                     WeiXinKFMessageUtil.replyTextMessage(token.getAccessToken(), openId, FHLConst.INFO_TERMINAL_SYSTEMERR);
-                }
+                } 
             } else {
                 //提示 不能领取
                 WeiXinKFMessageUtil.replyTextMessage(token.getAccessToken(), openId, FHLConst.INFO_TERMINAL_FAILURE);

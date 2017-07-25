@@ -67,11 +67,12 @@ public class WeiXinMenuConfig {
         WeiXinMenuButton sub_button_2 = new WeiXinMenuClickButton("我的分类", "click", "104");
 
         WeiXinMenuButton sub_button_3 = new WeiXinMenuClickButton("扫码领袋", "scancode_push", "1022");
-        //WeiXinMenuButton sub_button_3 = new WeiXinMenuClickButton("扫码领袋", "click", "1022");
-        WeiXinMenuButton sub_button_4 = new WeiXinMenuViewButton("个人中心", "view", WeiXinUserUtil.getCodeRequest(FHLConfig.APP_URL + "/person-center"));
+        WeiXinMenuButton sub_button_4 = new WeiXinMenuClickButton("扫码兑换", "scancode_push", "1023");// WeiXinUserUtil.getCodeRequest(FHLConfig.APP_URL + "/exchangeMachinePay"));
+
+        WeiXinMenuButton sub_button_5 = new WeiXinMenuViewButton("个人中心", "view", WeiXinUserUtil.getCodeRequest(FHLConfig.APP_URL + "/person-center"));
         //WeiXinMenuButton sub_button_5 = new WeiXinMenuClickButton("扫码共享", "click", "105");
 
-        button.setSub_button(new WeiXinMenuButton[]{sub_button_1, sub_button_2, sub_button_3, sub_button_4});//, sub_button_5});
+        button.setSub_button(new WeiXinMenuButton[]{sub_button_1, sub_button_2, sub_button_3, sub_button_4, sub_button_5});//, sub_button_5});
 
         return button;
     }

@@ -95,12 +95,12 @@ public class PersonCenterController {
             for (GroupOutput group : groups) {
                 GarCitizen garCitizen = userService.findCitizenById(group.getId());
                 if (garCitizen != null) {
-                    integral.setCurr(garCitizen.getIntCurrency());
-                    integral.setTotal(garCitizen.getAllScore());
-                    integral.setPick(garCitizen.getPickExchangeInt());
-                    integral.setRecycle(garCitizen.getRecycleExchangeInt());
-                    integral.setPut(garCitizen.getThrowExchangeInt());
-                    integral.setActivity(0);
+                    integral.setCurr(integral.getCurr() + garCitizen.getIntCurrency());
+                    integral.setTotal(integral.getTotal() + garCitizen.getAllScore());
+                    integral.setPick(integral.getPick() + garCitizen.getPickExchangeInt());
+                    integral.setRecycle(integral.getRecycle() + garCitizen.getRecycleExchangeInt());
+                    integral.setPut(integral.getPut() + garCitizen.getThrowExchangeInt());
+                    //integral.setActivity(0);
                 }
             }
 

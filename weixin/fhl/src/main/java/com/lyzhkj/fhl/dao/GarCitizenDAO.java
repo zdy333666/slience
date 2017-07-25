@@ -28,14 +28,14 @@ public class GarCitizenDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Transactional
-    public boolean bindUser(UserBindInput input) throws SQLException {
-        int n = jdbcTemplate.update("update gar_Citizen set openId=? WHERE mobilephone=?", input.getOpenId(), input.getPhoneno());
-        if (n <= 0) {
-            throw new SQLException();
-        }
-        return false;
-    }
+//    @Transactional
+//    public boolean bindUser(UserBindInput input) throws SQLException {
+//        int n = jdbcTemplate.update("update gar_Citizen set openId=? WHERE mobilephone=?", input.getOpenId(), input.getPhoneno());
+//        if (n <= 0) {
+//            throw new SQLException();
+//        }
+//        return false;
+//    }
 
     public boolean checkUserIsCitizen(String openId) {
 

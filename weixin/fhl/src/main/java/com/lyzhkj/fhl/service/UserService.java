@@ -17,6 +17,7 @@ import com.lyzhkj.fhl.pojo.GarUser;
 import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -49,23 +50,6 @@ public class UserService {
         return garCashierDAO.findGarCashierByPhone(user.getMobilephone());
     }
 
-//    //检查用户是否已进行绑定
-//    public boolean checkUserBind(String openId, String roleType) {
-//
-//        if ("1".equals(roleType)) {  //业主
-//            return garCitizenDAO.checkUserIsCitizen(openId);
-//        } else if ("2".equals(roleType)) { //商户
-//            return garUserDAO.checkUserIsMerchant(openId);
-//        } else if ("3".equals(roleType)) {//收银员
-//            return garUserDAO.checkUserIsCashier(openId);
-//        } else if ("4".equals(roleType)) {//巡检员
-//            return garPickerDAO.getGarPickerById(openId) == null;
-//        } else if ("5".equals(roleType)) {//市民
-//            return garUserDAO.checkUserBind(openId);
-//        }
-//
-//        return false;
-//    }
     public boolean checkUserBind(String openId) {
 
         GarUser user = garUserDAO.findUserCloudByOpenId(openId);
@@ -111,40 +95,41 @@ public class UserService {
     }
 
     //注册用户
+    @Transactional
     public int bindUser(UserBindInput input) {
+
+        int n = 0;
         try {
-            return garUserDAO.bindUser(input);
+            n = garUserDAO.bindUser(input);
+            if (n < 0) {
+                return n;
+            }
+            GarUser user = garUserDAO.findUserCloudByPhoneno(input.getPhoneno());
+            if (user == null) {
+                return 0;
+            }
+            GarCitizen garCitizen = garCitizenDAO.findGarCitizenByPhone(input.getPhoneno());
+            if (garCitizen == null) {
+                return 1;
+            }
+
+            if (garUserCitizenDAO.checkUserIsAdded(garCitizen.getCitizenId(), user.getUserId())) {
+                return 1;
+            }
+
+            boolean b = garUserCitizenDAO.addMemberOfGroup(garCitizen.getCitizenId(), user.getUserId(), 1);
+            if (b) {
+                return 1;
+            }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return n;
         }
 
-        return 0;
+        return n;
     }
 
-//    //注册用户
-//    public boolean userBind(UserBindInput input) {
-//
-//        String roleType = input.getRoleType();
-//
-//        try {
-//            if ("1".equals(roleType)) {  //业主
-//
-//            } else if ("2".equals(roleType)) { //商户
-//
-//            } else if ("3".equals(roleType)) {//收银员
-//
-//            } else if ("4".equals(roleType)) {//巡检员
-//
-//            } else if ("5".equals(roleType)) {//市民
-//                return garUserDAO.bindUser(input);
-//            }
-//
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        return false;
-//    }
     //注销（解绑）用户
     public boolean userLogoff(String openId) {
         try {

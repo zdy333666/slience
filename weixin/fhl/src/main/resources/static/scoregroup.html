@@ -81,7 +81,7 @@
                         var row = data[i];
 
                         var itemHtml = '<li class="clearfix" data-id=' + row.id + ' onclick=groupDetail(this)>';
-                        itemHtml += '<p class="fl"><span class="title">' + row.name + '</span><span class="admin">' + (row.isadmin ? '(管理员)' : '成员') + '</span></p>';
+                        itemHtml += '<p class="fl"><span class="title">' + row.name + '</span><span class="admin">' + (row.asAdmin ? '(管理员)' : '成员') + '</span></p>';
                         itemHtml += '<p class="fr"><span class="title">' + row.score + '</span><span class="score">积分</span></p>';
                         itemHtml += '</li>';
 

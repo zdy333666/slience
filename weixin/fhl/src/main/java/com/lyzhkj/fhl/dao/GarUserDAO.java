@@ -60,7 +60,12 @@ public class GarUserDAO {
         return jdbcTemplate.queryForRowSet("SELECT userId FROM gar_Users WHERE userType=2 AND mobilephone=?", phoneno).first();
     }
 
-    @Transactional
+    /**
+     *
+     * @param input
+     * @return
+     * @throws SQLException
+     */
     public int bindUser(UserBindInput input) throws SQLException {
         int n = 0;
 

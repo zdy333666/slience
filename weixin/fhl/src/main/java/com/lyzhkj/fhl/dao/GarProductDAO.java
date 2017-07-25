@@ -30,7 +30,7 @@ public class GarProductDAO {
     private JdbcTemplate jdbcTemplate;
 
     public int count() {
-        Map<String, Object> row = jdbcTemplate.queryForMap("SELECT count(1) AS count FROM gar_Product WHERE sellstate=0 AND status=1 AND productNumber>0");
+        Map<String, Object> row = jdbcTemplate.queryForMap("SELECT count(*) AS count FROM gar_Product WHERE sellstate=0 AND status=1 AND productNumber>0");
 
         return (int) row.get("count");
     }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>支付详情</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <link rel="stylesheet" type="text/css" href="css/machine_pay.css">
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- 遮罩层 -->
+            <div class="mask_paydetail"></div>
+            <!-- 兑换页面 -->
+            <div class="paydetail">
+                <p class="content">即将支付<span id="payScore"></span>积分</p>
+                <p>
+                    <button class="cancel" onclick="nopay()">取消</button>
+                    <button class="confirm" onclick="pay()">确定</button>
+                </p>
+            </div>
+            <div id="paydetail-main" hidden="">
+                <div class="paydetail-main-content">
+                    <div class="bg">
+                        <div class="title">
+                            <p class="name" id="goodsName"></p>
+                            <p class="score"><span id="score"></span>积分</p>
+                        </div>
+                        <div class="divide">
+                            <div class="left-circle"></div>
+                            <div class="right-circle"></div>
+                        </div>
+                        <div class="detail">
+                            <p>机器号：<span id="terminalNo"></span></p>
+                            <p>交易时间：<span id="tradeTime"></span></p>
+                            <p>实际价格：<span id="price"></span>元</p>
+                            <p>付费方式：<span>积分兑换</span></p>
+                            <p>业主：<span id="userName"></span></p>
+                            <p>电话：<span id="phoneNo"></span></p>
+                        </div>
+                    </div>
+                    <button class="pay">立即支付</button>
+                    <!--                    <button class="cancel">取消支付</button>-->
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jweixin-1.2.0.js"></script>
+        <script type="text/javascript" src="js/exchangemachine.js"></script>
+        <script type="text/javascript" src="js/date.js"></script>
+        <script type="text/javascript" src="js/paydetail.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,158 @@
+html{
+    font-size:62.5%;
+    color:#333;
+}
+body{
+    font-size:1.4rem;
+}
+
+/*支付详情页面*/
+#paydetail-main{
+    width:100%;
+    background:#eee;
+    overflow:hidden;
+}
+.paydetail-main-content{
+    width:92%;
+    margin:0 auto;
+}
+.paydetail-main-content .bg{
+    background:#fff;
+    width:100%;
+    border-radius:0.5rem;
+    margin-top:4%;
+}
+.paydetail-main-content .bg .title{
+    text-align:center;
+    padding:10% 0;
+    border-bottom:1px dashed #eee;
+}
+.paydetail-main-content .bg .title .name{
+    font-size:1.8rem;
+    margin-bottom:8%;
+}
+.paydetail-main-content .bg .title .score span{
+    color:#ef3232;
+    font-size:3rem;
+}
+.paydetail-main-content .bg .divide{
+    position:relative;
+}
+.paydetail-main-content .bg .divide .left-circle,
+.paydetail-main-content .bg .divide .right-circle{
+    position:absolute;
+    width:3rem;
+    height:3rem;
+    background:#eee;
+    border-radius:2rem;
+}
+.paydetail-main-content .bg .divide .left-circle{
+    left:-1.5rem;
+    top:-1.5rem;
+}
+.paydetail-main-content .bg .divide .right-circle{
+    right:-1.5rem;
+    top:-1.5rem;
+}
+.paydetail-main-content .bg .detail{
+    padding:10% 5%;
+    font-size:1.6rem;
+}
+.paydetail-main-content .bg .detail p{
+    margin-bottom:2%;
+}
+.paydetail-main-content .pay{
+    width:100%;
+    background:#19c69f;
+    color:#fff;
+    border-radius:0.5rem;
+    box-shadow:none;
+    border:none;
+    font-size:1.8rem;
+    padding:4% 0;
+    margin:5% 0 3%;
+}
+.paydetail-main-content .cancel{
+    width:100%;
+    color:#19c69f;
+    background:none;
+    border-radius:0.5rem;
+    box-shadow:none;
+    border:1px solid #19c69f;
+    font-size:1.8rem;
+    padding:4% 0;
+    margin-bottom:5%;
+}
+.mask_paydetail{
+    position:fixed;
+    width:100%;
+    background:rgba(0,0,0,0.3);
+    z-index:1000;
+    display:none;
+}
+.paydetail{
+    position:fixed;
+    width:80%;
+    left:10%;
+    background:#fff;
+    z-index:1001;
+    top:20%;
+    border-radius:0.5rem;
+    text-align:center;
+    display:none;
+}
+.paydetail .content{
+    font-size:1.8rem;
+    padding:20% 0;
+    border-bottom:1px solid #e5e5e5;
+}
+.paydetail p button{
+    font-size:1.8rem;
+    width:45%;
+    background:none;
+    border:none;
+    padding:5% 0;
+}
+.paydetail p button.confirm{
+    color:#19c69f;
+}
+
+/*支付成功页面*/
+#paysuccess-main{
+    width:100%;
+    overflow:hidden;
+}
+.paysuccess-main-content{
+    width:92%;
+    margin:0 auto;
+}
+.paysuccess-main-content .img{
+    width:100%;
+    margin:0 auto;
+    margin-top:20%;
+    margin-bottom:10%;
+}
+.paysuccess-main-content .img img{
+    width:100%;
+}
+.paysuccess-main-content .pay_content{
+    text-align:center;
+}
+.paysuccess-main-content .pay_content p:first-child{
+    font-size:2rem;
+    margin-bottom:0.5rem;
+}
+.paysuccess-main-content .pay_content p:last-child{
+    color:#666666;
+}
+.paysuccess-main-content button{
+    width:100%;
+    background:#19c69f;
+    color:#fff;
+    border-radius:0.5rem;
+    box-shadow:none;
+    border:none;
+    font-size:1.8rem;
+    padding:4% 0;
+    margin:20% 0 3%;
+}

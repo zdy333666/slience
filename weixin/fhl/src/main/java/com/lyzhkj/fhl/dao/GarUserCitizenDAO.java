@@ -113,16 +113,16 @@ public class GarUserCitizenDAO {
         return jdbcTemplate.queryForRowSet("SELECT userId FROM gar_user_citizen WHERE citizenId=? AND userId=?", groupId, userId).first();
     }
 
-    @Transactional
     public boolean addMemberOfGroup(String groupId, String userId) {
 
-        if (checkUserIsAdded(groupId, userId)) {
-            return false;
-        }
+        return addMemberOfGroup(groupId, userId, 0);
+    }
 
-        String sql = "insert into gar_user_citizen(id,userId,citizenId,isadmin,score,joinGroupTime) values (?,?,?,0,0,getdate())";
+    public boolean addMemberOfGroup(String groupId, String userId, int isAdmin) {
 
-        int n = jdbcTemplate.update(sql, UUID.randomUUID().toString(), userId, groupId);
+        String sql = "insert into gar_user_citizen(id,userId,citizenId,isadmin,score,joinGroupTime) values (?,?,?,?,0,getdate())";
+
+        int n = jdbcTemplate.update(sql, UUID.randomUUID().toString(), userId, groupId, isAdmin);
 
         return n > 0;
     }

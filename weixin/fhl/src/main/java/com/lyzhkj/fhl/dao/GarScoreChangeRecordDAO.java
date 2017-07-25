@@ -32,7 +32,7 @@ public class GarScoreChangeRecordDAO {
 
     public int countWithUser(String userId) {
 
-        String sql = "SELECT count(1) AS count FROM gar_ScoreChangeRecord scr,gar_Product p WHERE scr.ProductId=p.productId AND scr.Status IN('0','1') AND UserId=?";
+        String sql = "SELECT count(*) AS count FROM gar_ScoreChangeRecord scr,gar_Product p WHERE scr.ProductId=p.productId AND scr.Status IN('0','1') AND UserId=?";
         Map<String, Object> row = jdbcTemplate.queryForMap(sql, userId);
 
         return (int) row.get("count");

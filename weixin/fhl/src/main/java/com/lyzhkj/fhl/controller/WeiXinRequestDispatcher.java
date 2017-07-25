@@ -9,6 +9,7 @@ import com.lyzhkj.fhl.handler.WeiXinClickEventHandler;
 import com.lyzhkj.fhl.handler.WeiXinLocationEventHandler;
 import com.lyzhkj.fhl.handler.WeiXinScanCodePushEventHandler;
 import com.lyzhkj.fhl.handler.WeiXinSubscribeEventHandler;
+import com.lyzhkj.fhl.service.ChatService;
 import com.lyzhkj.weixin.common.util.WeiXinMessageConst;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -33,18 +34,23 @@ public class WeiXinRequestDispatcher {
 
     @Autowired
     private WeiXinScanCodePushEventHandler weiXinScanCodePushEventHandler;
-    
+
     @Autowired
     private WeiXinLocationEventHandler weiXinLocationEventHandler;
+
+    @Autowired
+    private ChatService chatService;
 
     public void dispatch(Map<String, String> body) {
 
         String msgType = body.get("MsgType");
-        //输入
-        if (WeiXinMessageConst.MESSAGE_TEXT.equals(msgType)) {
-            //用户输入
-            //String openId = body.get("FromUserName");
 
+        if (WeiXinMessageConst.MESSAGE_TEXT.equals(msgType)) {
+
+            String openId = body.get("FromUserName");
+            String content = body.get("Content");
+
+            chatService.service(openId, content);
             return;
         }
 
@@ -77,7 +83,7 @@ public class WeiXinRequestDispatcher {
 
             } else if (WeiXinMessageConst.MESSAGE_VIEW.equals(event)) {
 
-            }else if (WeiXinMessageConst.MESSAGE_LOCATION.equals(event)) {
+            } else if (WeiXinMessageConst.MESSAGE_LOCATION.equals(event)) {
 
                 weiXinLocationEventHandler.handle(body);
             }
