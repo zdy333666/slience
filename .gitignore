@@ -11,3 +11,5 @@
 /services/gabinfo/target/
 /test/service-graph-neo4j/target/
 /services/rchl/target/
+/spring-mybatis-redis/target/
+/spring-mybatis/target/
