@@ -4,5 +4,9 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="Python 3.6.2 (C:\MyProgramFiles\Python36\python.exe)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="jieba-demo" />
+    <orderEntry type="module" module-name="python_basic" />
+    <orderEntry type="module" module-name="tensorflowDemo" />
+    <orderEntry type="module" module-name="pymongo-demo" />
   </component>
 </module>
