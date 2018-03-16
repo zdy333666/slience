@@ -9,19 +9,22 @@ package cn.slience.springboot.demo.pojo;
  *
  * @author breeze
  */
-public class Greeting {
+public class HelloMessage {
 
-    private String content;
+    private String name;
 
-    public Greeting() {
+    public HelloMessage() {
     }
 
-    public Greeting(String content) {
-        this.content = content;
+    public HelloMessage(String name) {
+        this.name = name;
     }
 
-    public String getContent() {
-        return content;
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }

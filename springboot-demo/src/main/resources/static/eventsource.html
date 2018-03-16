@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>EventSource</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript">
+            if (typeof (EventSource) !== "undefined")
+            {
+                // 浏览器支持 Server-Sent
+                var source = new EventSource("http://localhost:8080/event");
+                source.onopen = function (event) {
+                    console.log("EventSource Connected");
+                };
+                source.onmessage = function (event) {
+                    console.log(event.data);
+                    document.getElementById("result").innerHTML = event.data + "<br>";
+                };
+                source.onerror = function (event) {
+                    console.log(event.data);
+                };
+            } else {
+                alert("浏览器不支持 Server-Sent..");
+            }
+
+        </script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <p>输出： <output id="result"></output></p>
+    </body>
+</html>

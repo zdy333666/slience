@@ -5,7 +5,7 @@
  */
 package cn.slience.springboot.demo.controller;
 
-import cn.slience.springboot.demo.pojo.Greeting;
+import cn.slience.springboot.demo.pojo.Demo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +33,15 @@ public class WebClientController {
 
     @RequestMapping(value = "test", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public Mono<Greeting> test() {
-        return webClient.get().uri("/greeting").retrieve().bodyToMono(Greeting.class
+    public Mono<Demo> test() {
+        return webClient.get().uri("/greeting").retrieve().bodyToMono(Demo.class
         );
     }
 
     @GetMapping("demo")
     @ResponseBody
-    public Flux<Greeting> demo() {
-        return webClient.get().uri("/greeting").retrieve().bodyToFlux(Greeting.class
+    public Flux<Demo> demo() {
+        return webClient.get().uri("/greeting").retrieve().bodyToFlux(Demo.class
         );
     }
 

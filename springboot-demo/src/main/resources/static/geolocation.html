@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Geolocation</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript">
+            var x = document.getElementById("demo");
+            function getLocation()
+            {
+                if (navigator.geolocation)
+                {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else
+                {
+                    x.innerHTML = "该浏览器不支持获取地理位置。";
+                }
+            }
+
+            function showPosition(position)
+            {
+                x.innerHTML = "纬度: " + position.coords.latitude +
+                    "<br>经度: " + position.coords.longitude;
+            }
+        </script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <p>输出： <output id="demo"></output></p>
+    </body>
+</html>

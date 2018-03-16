@@ -5,14 +5,25 @@
  */
 package cn.slience.springboot.demo.pojo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author breeze
  */
-public class SimpleModel {
+public class SimpleModel implements Serializable {
 
     private String name;
     private String address;
+
+    public SimpleModel() {
+
+    }
+
+    public SimpleModel(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
 
     /**
      * @return the name

@@ -5,23 +5,24 @@
  */
 package cn.slience.springboot.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.hateoas.ResourceSupport;
+
 /**
  *
  * @author breeze
  */
-public class Greeting {
+public class HypermediaGreeting extends ResourceSupport {
 
-    private String content;
+    private final String content;
 
-    public Greeting() {
-    }
-
-    public Greeting(String content) {
+    @JsonCreator
+    public HypermediaGreeting(@JsonProperty("content") String content) {
         this.content = content;
     }
 
     public String getContent() {
         return content;
     }
-
 }

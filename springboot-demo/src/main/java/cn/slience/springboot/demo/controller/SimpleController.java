@@ -5,15 +5,13 @@
  */
 package cn.slience.springboot.demo.controller;
 
-import cn.slience.springboot.demo.pojo.Greeting;
+import cn.slience.springboot.demo.pojo.Demo;
 import cn.slience.springboot.demo.pojo.SimpleModel;
 import cn.slience.springboot.demo.service.SimpleService;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,22 +33,19 @@ public class SimpleController {
     @Autowired
     private SimpleService simpleService;
 
-    @Autowired
-    private ConcurrentMapCacheManager cacheManager;
-
-    @RequestMapping(value = "/greeting", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/demo", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
+    public Demo demo(@RequestParam(value = "name", defaultValue = "World") String name) {
+        return new Demo(counter.incrementAndGet(), String.format(template, name));
     }
 
     @RequestMapping(value = "/cache", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public SimpleModel testCache(@RequestParam(value = "name", defaultValue = "slience") String name) {
         try {
-            cacheManager.setStoreByValue(true);
-            
+
             return simpleService.testCache(name);
+
         } catch (InterruptedException ex) {
             logger.error("", ex);
             return null;

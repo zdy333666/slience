@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -32,15 +33,21 @@ public class ScheduleJobs {
     @Autowired
     private AsyncService asyncService;
 
+    @CacheEvict(value = "models", allEntries = true)
+    @Scheduled(fixedDelay = 60000)
+    public void deleteFromCache() {
+    }
+
     @Scheduled(fixedDelay = SECOND * 2)
     public void fixedDelayJob() throws InterruptedException {
         TimeUnit.SECONDS.sleep(2);
-        //logger.info("[FixedDelayJob Execute]" + fdf.format(new Date()));
+        logger.info("-- [FixedDelayJob Execute]" + fdf.format(new Date()));
     }
 
     @Scheduled(fixedRate = SECOND * 1)
     public void fixedRateJob() throws InterruptedException {
-        //logger.info("--{}-- [FixedRateJob Execute]--{}", counter.incrementAndGet(), fdf.format(new Date()));
+        logger.info("-- [FixedRateJob Execute]--{}", fdf.format(new Date()));
         //asyncService.service();
     }
+
 }

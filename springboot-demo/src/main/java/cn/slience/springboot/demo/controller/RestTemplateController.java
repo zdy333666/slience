@@ -5,7 +5,7 @@
  */
 package cn.slience.springboot.demo.controller;
 
-import cn.slience.springboot.demo.pojo.Greeting;
+import cn.slience.springboot.demo.pojo.Demo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +30,8 @@ public class RestTemplateController {
 
     @RequestMapping(value = "test", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public Greeting test() {
-        return restTemplate.getForObject("/greeting", Greeting.class);
+    public Demo test() {
+        return restTemplate.getForObject("/greeting", Demo.class);
     }
 
 }
