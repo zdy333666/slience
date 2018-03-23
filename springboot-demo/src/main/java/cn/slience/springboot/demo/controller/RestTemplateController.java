@@ -34,4 +34,13 @@ public class RestTemplateController {
         return restTemplate.getForObject("/greeting", Demo.class);
     }
 
+    @RequestMapping(value = "compress", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public String compress() {
+
+        String str = new RestTemplate().getForObject("https://docs.spring.io/spring-boot/docs/2.0.0.RELEASE/reference/htmlsingle/#boot-features-cors", String.class);
+
+        return str;
+    }
+
 }
