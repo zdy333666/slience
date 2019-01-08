@@ -6,6 +6,7 @@
 package com.lyzh.mqtt;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.AdaptiveRecvByteBufAllocator;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -34,7 +35,7 @@ public class Application {
     static final boolean SSL = System.getProperty("ssl") != null;
     static final String HOST = System.getProperty("host", "106.12.102.218");
     static final int PORT = Integer.parseInt(System.getProperty("port", "1883"));
-    static final int SIZE = Integer.parseInt(System.getProperty("size", "256"));
+//    static final int SIZE = Integer.parseInt(System.getProperty("size", "256"));
 
     public static void main(String[] args) {
 
@@ -55,7 +56,8 @@ public class Application {
 
             b.group(group)
                     .channel(NioSocketChannel.class)
-                    .option(ChannelOption.TCP_NODELAY, true)
+                    .option(ChannelOption.TCP_NODELAY, false)
+                    .option(ChannelOption.RCVBUF_ALLOCATOR, new  AdaptiveRecvByteBufAllocator())
 //                    .handler(new LoggingHandler(LogLevel.INFO))
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
