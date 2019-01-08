@@ -56,7 +56,8 @@ public class Application {
             b.group(group)
                     .channel(NioSocketChannel.class)
                     .option(ChannelOption.TCP_NODELAY, true)
-//                    .handler(new LoggingHandler(LogLevel.INFO))
+//                    .option(ChannelOption.SO_LINGER, 0)
+                    //                    .handler(new LoggingHandler(LogLevel.INFO))
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {

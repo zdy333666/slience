@@ -34,6 +34,7 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
 
     private static final MqttFixedHeader heartBeatFixedHeader = new MqttFixedHeader(MqttMessageType.PINGREQ, false, MqttQoS.AT_MOST_ONCE, false, 0);
     private static final MqttMessage heartBeatMsg = new MqttMessage(heartBeatFixedHeader);
+    
     private static final String prefix = "It's not who I am underneath, but what I do that defines me. --";  //Hello MQTT-
 
     @Override
@@ -48,7 +49,7 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
         System.out.println("channelActive-->" + ctx);
 
         MqttFixedHeader mqttFixedHeader = new MqttFixedHeader(MqttMessageType.CONNECT, false, MqttQoS.AT_MOST_ONCE, false, 0);
-        MqttConnectVariableHeader variableHeader = new MqttConnectVariableHeader("MQTT", MqttVersion.MQTT_3_1_1.protocolLevel(), false, false, false, 0, false, false, 300);
+        MqttConnectVariableHeader variableHeader = new MqttConnectVariableHeader("MQTT", MqttVersion.MQTT_3_1_1.protocolLevel(), false, false, false, 0, false, false, 30);
         MqttConnectPayload payload = new MqttConnectPayload("test-" + System.currentTimeMillis(), "topic", new byte[0], null, new byte[0]);
         MqttConnectMessage msg = new MqttConnectMessage(mqttFixedHeader, variableHeader, payload);
 
@@ -57,28 +58,26 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
         //发送心跳信息-------------------------------------
         ctx.channel().eventLoop().scheduleWithFixedDelay(() -> {
             ctx.writeAndFlush(heartBeatMsg);
-        }, 1, 1, TimeUnit.SECONDS);
+        }, 1, 15, TimeUnit.SECONDS);
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         try {
             MqttMessage mqttMsg = (MqttMessage) msg;
-            System.out.println("messageType-->" + mqttMsg.fixedHeader().messageType().name());
-//            System.out.println("payload-->" + mqttMsg.payload());
+            MqttMessageType messageType = mqttMsg.fixedHeader().messageType();
+            System.out.println("messageType-->" + messageType);
 
-            if (mqttMsg.fixedHeader().messageType() == MqttMessageType.PINGRESP) {
-                
+            if (messageType == MqttMessageType.CONNACK || messageType == MqttMessageType.PUBCOMP) {
+
                 String words = prefix + counter.incrementAndGet();
                 byte[] data = words.getBytes();
 //            ByteBuf payload = ctx.alloc()
 //                    .directBuffer(data.length)
 //                    .writeBytes(data);
-
 //                Unpooled.directBuffer(data.length).writeBytes(data);
-
                 MqttPublishMessage publishMsg = MqttMessageBuilders.publish()
-                        .qos(MqttQoS.AT_LEAST_ONCE)
+                        .qos(MqttQoS.EXACTLY_ONCE)
                         .retained(false)
                         .topicName("topic")
                         .messageId(counter.get())
@@ -86,6 +85,12 @@ public class MyHandler extends ChannelInboundHandlerAdapter {
                         .build();
 
                 ctx.writeAndFlush(publishMsg);
+            } else if (messageType == MqttMessageType.PUBREC) {
+                
+                MqttFixedHeader mqttFixedHeader = new MqttFixedHeader(MqttMessageType.PUBREL, false, MqttQoS.AT_LEAST_ONCE, false, 2);
+                MqttMessage pubRELMsg = new MqttMessage(mqttFixedHeader, mqttMsg.variableHeader());
+
+                ctx.writeAndFlush(pubRELMsg);
             }
 
         } finally {
