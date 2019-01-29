@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author Len
  */
-@FeignClient(value="rest1")
+@FeignClient(value = "rest1")
 public interface Rest1Client {
-    
-    @RequestMapping(value = "echo", method = {RequestMethod.GET})
+
+    @RequestMapping(value = "echo", method = {RequestMethod.POST})
     public String echo();
-    
+
 }
