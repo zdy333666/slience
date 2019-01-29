@@ -5,11 +5,13 @@
  */
 package cn.slience.rest.controller;
 
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 /**
  *
@@ -18,12 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestEchoController {
 
-    @RequestMapping(value = "echo", method = {RequestMethod.GET})
-    public String echo() throws InterruptedException {
+    @RequestMapping(value = "echo", method = {RequestMethod.GET, RequestMethod.POST})
+    public Mono<String> echo(ServerHttpRequest request) {
 
-        TimeUnit.MILLISECONDS.sleep(1000 + new Random().nextInt(1000));
+        System.out.println(Thread.currentThread().getName() + "--request from-->" + request.getRemoteAddress() + "   at " + LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 
-        return "welcome to rest1";
+        return Mono.just("welcome to rest1");
     }
 
 }
